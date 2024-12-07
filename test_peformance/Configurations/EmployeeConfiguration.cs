@@ -15,7 +15,7 @@ public class EmployeeConfiguration: IEntityTypeConfiguration<Employee>
         builder.HasOne(c => c.Department)
             .WithMany(c => c.Employees)
             .HasForeignKey(c => c.DepartmentId)
-            .OnDelete(DeleteBehavior.SetNull);
+           ;
 
         builder.ToTable(TableNames.Employee);
 

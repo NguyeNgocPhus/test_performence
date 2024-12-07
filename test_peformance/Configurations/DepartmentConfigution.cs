@@ -11,7 +11,6 @@ public class DepartmentConfiguration : IEntityTypeConfiguration<Department>
     {
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Name).IsRequired().IsUnicode();
-        
         builder.ToTable(TableNames.Department);
 
     }
