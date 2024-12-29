@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using test_peformance;
 using test_peformance.Abstractions;
+using Thinktecture;
+using Thinktecture.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +17,10 @@ var appDb = builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
 var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
 builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
 {
-    option.UseSqlServer(connectionString).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    option.UseSqlServer(connectionString, sqlOptions =>
+    {
+        // sqlOptions.AddBulkOperationSupport();
+    }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     option.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); }));
 });
 
