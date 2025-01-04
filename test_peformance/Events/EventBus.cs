@@ -16,6 +16,7 @@ public sealed class EventBus : IEventBus
     {
         _channel.Writer.TryWrite(@event);
         await _inMemoryMessageQueue.Writer.WriteAsync(@event, cancellationToken);
+        
     }
 
     public async Task GetAllEventAsync(CancellationToken cancellationToken)
@@ -24,6 +25,7 @@ public sealed class EventBus : IEventBus
         {
             Console.WriteLine($"data la : {item.EventId}");
         }
+        // _channel.Reader.TryRead()
        // Console.WriteLine($"{nameof(EventBus)}.{nameof(GetAllEventAsync)} {a1.EventId}");
        
     }

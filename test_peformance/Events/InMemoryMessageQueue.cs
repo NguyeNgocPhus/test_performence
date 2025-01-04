@@ -8,7 +8,6 @@ public class InMemoryMessageQueue
     private List<IIntegrationEvent> abc = new List<IIntegrationEvent>();
     public ChannelWriter<IIntegrationEvent>  Writer => _channel.Writer;
     public ChannelReader<IIntegrationEvent> Reader => _channel.Reader;
-
     public void AddList(IIntegrationEvent integrationEvent)
     {
         var a = new SemaphoreSlim(1);
