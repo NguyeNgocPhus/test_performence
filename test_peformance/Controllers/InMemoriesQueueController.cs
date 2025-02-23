@@ -31,7 +31,7 @@ public class InMemoriesQueueController : ControllerBase
             Password = random.Next(1, 100).ToString(),
         };
         
-        _inMemoryMessageQueue.AddList(dataEvent);
+        // _inMemoryMessageQueue.AddList(dataEvent);
         await _eventBus.PublishAsync(dataEvent, cancellationToken);
         return Ok("OK");
     }

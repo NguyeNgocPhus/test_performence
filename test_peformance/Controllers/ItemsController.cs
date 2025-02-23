@@ -7,10 +7,12 @@ namespace test_peformance.Controllers;
 public class ItemsController : ControllerBase
 {
     private static int _items = 0; // Tài nguyên chung
+
     private readonly ILogger<ItemsController> _logger;
+
     // Tạo một SemaphoreSlim duy nhất cho cả hai API
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1); // Chỉ cho phép 1 request cùng lúc
-    
+
     public ItemsController(ILogger<ItemsController> logger)
     {
         _logger = logger;
@@ -19,13 +21,19 @@ public class ItemsController : ControllerBase
     [HttpGet("increment")]
     public async Task<IActionResult> AddItem()
     {
+        // var a = () => { _items += 1; };
+        //
+        // var thread1 = new Thread(() => { _items++; });
+        // thread1.Priority = ThreadPriority.BelowNormal;
+
         await _semaphore.WaitAsync();
         try
         {
             _items += 1;
             _logger.LogInformation($"increment {_items} items");
             return Ok("Item increment");
-        } finally
+        }
+        finally
         {
             _semaphore.Release(); // Giải phóng quyền truy cập
         }
@@ -40,7 +48,8 @@ public class ItemsController : ControllerBase
             _items -= 1;
             _logger.LogInformation($"decrement {_items} items");
             return Ok("Item decrement");
-        } finally
+        }
+        finally
         {
             _semaphore.Release(); // Giải phóng quyền truy cập
         }

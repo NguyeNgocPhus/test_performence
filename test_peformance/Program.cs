@@ -2,8 +2,6 @@ using Microsoft.EntityFrameworkCore;
 using test_peformance;
 using test_peformance.Abstractions;
 using test_peformance.Events;
-using Thinktecture;
-using Thinktecture.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,10 +27,10 @@ builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase2<,>
 builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
 builder.Services.AddScoped<ApplicationDbContext>();
-builder.Services.AddScoped<InMemoryMessageQueue>();
-builder.Services.AddScoped<IEventBus, EventBus>();
-// builder.Services.AddHostedService<IntegrationEventProcessJob>();
-//
+builder.Services.AddSingleton<InMemoryMessageQueue>();
+builder.Services.AddSingleton<IEventBus, EventBus>();
+builder.Services.AddHostedService<IntegrationEventProcessJob>();
+
 
 var app = builder.Build();
 
@@ -45,11 +43,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseRouting();
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-app.UseEndpoints(endpoints =>
-{
-    // Elsa API Endpoints are implemented as regular ASP.NET Core API controllers.
-    endpoints.MapControllers();
-});
+
+app.MapControllers();
+
 app.Run();

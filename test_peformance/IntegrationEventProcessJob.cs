@@ -5,20 +5,30 @@ namespace test_peformance;
 
 public class IntegrationEventProcessJob : BackgroundService
 {
-    private readonly IEventBus _eventBus;
     private readonly InMemoryMessageQueue _inMemoryMessageQueue;
-
-    public IntegrationEventProcessJob(IEventBus eventBus, InMemoryMessageQueue inMemoryMessageQueue)
+    private readonly ILogger<IntegrationEventProcessJob> _logger;
+    
+    public IntegrationEventProcessJob(InMemoryMessageQueue inMemoryMessageQueue, ILogger<IntegrationEventProcessJob> logger)
     {
-        _eventBus = eventBus;
         _inMemoryMessageQueue = inMemoryMessageQueue;
+        _logger = logger;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        await foreach (var item in _inMemoryMessageQueue.Reader.ReadAllAsync(cancellationToken: stoppingToken))
-        {
-            Console.WriteLine($"data la : {item.EventId}");
-        }
+        // while (!stoppingToken.IsCancellationRequested)
+        // {
+        //     var listData = new List<IIntegrationEvent>();
+        //     
+        //     for (int i = 0; i < 10000; i++) 
+        //     {
+        //         var a = _inMemoryMessageQueue.Reader.TryRead(out var message);
+        //         if (a)
+        //             listData.Add(message);
+        //     }
+        //     WeatherForecast.Sum += listData.Count;
+        //     // _logger.LogInformation($"{WeatherForecast.Sum} integration events processed.");
+        //     await Task.Delay(2000, stoppingToken);
+        // }
     }
 }
