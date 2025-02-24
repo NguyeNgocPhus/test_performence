@@ -1,4 +1,3 @@
-using test_peformance.Abstractions;
 using test_peformance.Events;
 
 namespace test_peformance;
