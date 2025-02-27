@@ -28,6 +28,7 @@ builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>)
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
 builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddSingleton<InMemoryMessageQueue>();
+builder.Services.AddSingleton<IMessageQueueService, MessageQueueService>();
 builder.Services.AddSingleton<IEventBus, EventBus>();
 builder.Services.AddHostedService<IntegrationEventProcessJob>();
 

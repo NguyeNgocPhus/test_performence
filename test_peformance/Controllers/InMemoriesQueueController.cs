@@ -1,5 +1,8 @@
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using test_peformance.Abstractions;
+using test_peformance.Entities;
 using test_peformance.Events;
 
 namespace test_peformance.Controllers;
@@ -7,48 +10,45 @@ namespace test_peformance.Controllers;
 public class InMemoriesQueueController : ControllerBase
 {
     private readonly ILogger<WeatherForecastController> _logger;
-    private readonly ApplicationDbContext _dbContext;
-    private readonly IEventBus _eventBus;
-    private readonly InMemoryMessageQueue _inMemoryMessageQueue;
-    public InMemoriesQueueController(ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext,
-        IEventBus eventBus, InMemoryMessageQueue inMemoryMessageQueue)
+    private readonly IMessageQueueService _messageQueue;
+
+    public InMemoriesQueueController(ILogger<WeatherForecastController> logger, IMessageQueueService messageQueue)
     {
         _logger = logger;
-        _dbContext = dbContext;
-        _eventBus = eventBus;
-        _inMemoryMessageQueue = inMemoryMessageQueue;
+        _messageQueue = messageQueue;
     }
 
     [HttpPost]
     [Route("hub_event")]
     public async Task<ActionResult> HubEvent([FromBody] PutDepartment req, CancellationToken cancellationToken)
     {
-        Random random = new Random();
-        var dataEvent = new HubEvent()
+        var random = new Random();
+        var department = new Department()
         {
-            EventId = req.Id.ToString(),
             Name = req.Name,
-            Password = random.Next(1, 100).ToString(),
+            Version = Guid.NewGuid(),
         };
-        
-        // _inMemoryMessageQueue.AddList(dataEvent);
-        await _eventBus.PublishAsync(dataEvent, cancellationToken);
+        var queueEvent = new QueueMessage()
+        {
+             EventId = Guid.NewGuid().ToString(),
+             EntityName = department.GetType().FullName,
+             ObjEvent = JsonSerializer.Serialize(department)
+        };
+        await _messageQueue.EnqueueAsync(queueEvent, cancellationToken);
         return Ok("OK");
     }
-    [HttpPost]
-    [Route("complete_event")]
-    public async Task<ActionResult> CompleteEvent( CancellationToken cancellationToken)
-    {
-        _inMemoryMessageQueue.Writer.Complete();
-        return Ok("OK");
-    }
-
-    [HttpGet]
-    [Route("get_event_from_queue")]
-    public async Task<ActionResult> GetEvent(CancellationToken cancellationToken)
-    {
-
-        await _eventBus.GetAllEventAsync(cancellationToken);
-        return Ok("OK");
-    }
+    // [HttpPost]
+    // [Route("complete_event")]
+    // public async Task<ActionResult> CompleteEvent( CancellationToken cancellationToken)
+    // {
+    //     _inMemoryMessageQueue.Writer.Complete();
+    //     return Ok("OK");
+    // }
+    //
+    // [HttpGet]
+    // [Route("get_event_from_queue")]
+    // public async Task<ActionResult> GetEvent(CancellationToken cancellationToken)
+    // {
+    //     return Ok("OK");
+    // }
 }

@@ -4,9 +4,9 @@ namespace test_peformance.Events;
 
 public class InMemoryMessageQueue
 {
-    private readonly Channel<IIntegrationEvent> _channel = Channel.CreateUnbounded<IIntegrationEvent>();
+    private readonly Channel<QueueMessage> _channel = Channel.CreateUnbounded<QueueMessage>();
 
-    public ChannelWriter<IIntegrationEvent>  Writer => _channel.Writer;
-    public ChannelReader<IIntegrationEvent> Reader => _channel.Reader;
+    public ChannelWriter<QueueMessage>  Writer => _channel.Writer;
+    public ChannelReader<QueueMessage> Reader => _channel.Reader;
  
 }

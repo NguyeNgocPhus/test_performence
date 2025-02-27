@@ -15,7 +15,7 @@ public sealed class EventBus : IEventBus
     public async Task PublishAsync<T>(T @event, CancellationToken cancellationToken) where T : class, IIntegrationEvent
     {
         _channel.Writer.TryWrite(@event);
-        await _inMemoryMessageQueue.Writer.WriteAsync(@event, cancellationToken);
+        // await _inMemoryMessageQueue.Writer.WriteAsync(@event, cancellationToken);
         
     }
 
