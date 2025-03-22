@@ -2,7 +2,6 @@ using System.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using test_peformance.Entities;
-using Thinktecture;
 
 namespace test_peformance.Controllers;
 
@@ -49,7 +48,7 @@ public class DepartmentController : ControllerBase
 
 
         var departments1 = await (from d in _dbContext.Departments
-            join i in _dbContext.IntValues(userIds) on d.Id equals i.Values 
+            // join i in _dbContext.IntValues(userIds) on d.Id equals i.Values 
             select d).ToListAsync();
         return Ok(departments1);
     }

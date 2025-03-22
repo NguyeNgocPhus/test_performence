@@ -17,10 +17,45 @@ namespace test_peformance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.7")
+                .HasAnnotation("ProductVersion", "7.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Thinktecture:TempTable:Thinktecture.EntityFrameworkCore.TempTables.TempTable<int>", b =>
+                {
+                    b.Property<int>("Column1")
+                        .HasColumnType("int");
+
+                    b.ToTable("#TempTable<int>", null, t =>
+                        {
+                            t.ExcludeFromMigrations();
+                        });
+                });
+
+            modelBuilder.Entity("test_peformance.Entities.Conversation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("LastActivityAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.Property<string>("OrderId")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Conversations");
+                });
 
             modelBuilder.Entity("test_peformance.Entities.Department", b =>
                 {
@@ -28,7 +63,7 @@ namespace test_peformance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -37,7 +72,6 @@ namespace test_peformance.Migrations
 
                     b.Property<Guid>("Version")
                         .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate()
                         .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
@@ -51,7 +85,7 @@ namespace test_peformance.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<int>("DepartmentId")
                         .HasColumnType("int");
@@ -71,6 +105,44 @@ namespace test_peformance.Migrations
                     b.ToTable("Employee", (string)null);
                 });
 
+            modelBuilder.Entity("test_peformance.Entities.IntValueEntity", b =>
+                {
+                    b.Property<int>("Values")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Values"));
+
+                    b.HasKey("Values");
+
+                    b.ToTable("IntValueEntity");
+                });
+
+            modelBuilder.Entity("test_peformance.Entities.Message", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ConversationId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(255)
+                        .HasColumnType("nvarchar(255)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ConversationId");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("test_peformance.Entities.Employee", b =>
                 {
                     b.HasOne("test_peformance.Entities.Department", "Department")
@@ -80,6 +152,22 @@ namespace test_peformance.Migrations
                         .IsRequired();
 
                     b.Navigation("Department");
+                });
+
+            modelBuilder.Entity("test_peformance.Entities.Message", b =>
+                {
+                    b.HasOne("test_peformance.Entities.Conversation", "Conversation")
+                        .WithMany("Messages")
+                        .HasForeignKey("ConversationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Conversation");
+                });
+
+            modelBuilder.Entity("test_peformance.Entities.Conversation", b =>
+                {
+                    b.Navigation("Messages");
                 });
 
             modelBuilder.Entity("test_peformance.Entities.Department", b =>

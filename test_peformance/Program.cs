@@ -10,8 +10,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-// dotnet ef migrations add "$2" --project Identity.Infrastructure --context ApplicationDbContext --startup-project Identity.WebApi --output-dir Databases/Migrations
-// dotnet ef database update --project Identity.Infrastructure --startup-project Identity.WebApi --context ApplicationDbContext
+// dotnet ef migrations add "Conversation" --project test_peformance --context ApplicationDbContext --startup-project test_peformance --output-dir Migrations
+// dotnet ef database update --project test_peformance --startup-project test_peformance --context ApplicationDbContext
 var appDb = builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
 var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
 builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
@@ -30,7 +30,7 @@ builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddSingleton<InMemoryMessageQueue>();
 builder.Services.AddSingleton<IMessageQueueService, MessageQueueService>();
 builder.Services.AddSingleton<IEventBus, EventBus>();
-builder.Services.AddHostedService<IntegrationEventProcessJob>();
+// builder.Services.AddHostedService<IntegrationEventProcessJob>();
 
 
 var app = builder.Build();
