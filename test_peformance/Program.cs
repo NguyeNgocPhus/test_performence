@@ -25,6 +25,10 @@ builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
     }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     option.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); }));
 });
+// Thêm Redis vào DI container
+string redisConnection  = builder.Configuration.GetConnectionString("Redis");
+builder.Services.AddSingleton(new RedisCacheService(redisConnection));
+
 
 builder.Services.AddAuthentication(options =>
 {
