@@ -1,18 +1,24 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using test_peformance.Contants;
 using test_peformance.Entities;
 
 namespace test_peformance.Controllers;
 
 [ApiController]
+[Authorize(AuthenticationSchemes = AuthScheme.Hub)]
 [Route("api/[controller]")]
 public class MessageController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public MessageController(ApplicationDbContext context)
+    private readonly IHubContext<ChatHub> _chatHub;
+    public MessageController(ApplicationDbContext context, IHubContext<ChatHub> chatHub)
     {
         _context = context;
+        _chatHub = chatHub;
     }
 
     [HttpGet]
@@ -57,11 +63,11 @@ public class MessageController : ControllerBase
         {
             return BadRequest("Invalid ConversationId");
         }
-        
+        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "anonymous";    
         conversation.LastActivityAt = DateTime.UtcNow;
         _context.Messages.Add(message);
         await _context.SaveChangesAsync();
-
+        await _chatHub.Clients.User("userId").SendAsync("ReceiveMessage","cccccc");
         return CreatedAtAction(nameof(GetMessage), new { id = message.Id }, message);
     }
 

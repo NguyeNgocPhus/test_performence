@@ -82,3 +82,11 @@
 /Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Thinktecture.EntityFrameworkCore.BulkOperations.dll
 /Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Thinktecture.EntityFrameworkCore.Relational.dll
 /Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Thinktecture.EntityFrameworkCore.SqlServer.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/MessagePack.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/MessagePack.Annotations.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.AspNetCore.Connections.Abstractions.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.AspNetCore.SignalR.Common.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.AspNetCore.SignalR.Protocols.MessagePack.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.Extensions.Features.dll
+/Users/phunn/Documents/Code/test_peformance/test_peformance/bin/Debug/net7.0/Microsoft.Extensions.Options.dll
