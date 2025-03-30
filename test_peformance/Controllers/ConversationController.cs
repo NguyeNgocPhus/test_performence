@@ -19,7 +19,7 @@ public class ConversationController : ControllerBase
     public async Task<ActionResult<IEnumerable<Conversation>>> GetConversations()
     {
         return await _context.Conversations
-            .Include(c => c.Messages)
+            // .Include(c => c.Messages)
             .ToListAsync();
     }
 
@@ -27,7 +27,7 @@ public class ConversationController : ControllerBase
     public async Task<ActionResult<Conversation>> GetConversation(int id)
     {
         var conversation = await _context.Conversations
-            .Include(c => c.Messages)
+            // .Include(c => c.Messages)
             .FirstOrDefaultAsync(c => c.Id == id);
 
         if (conversation == null)

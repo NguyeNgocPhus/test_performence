@@ -52,7 +52,7 @@ public class ApplicationDbContext : DbContext
         modelBuilder.Entity<Message>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.Content).HasMaxLength(255);
             entity.Property(e => e.CreatedAt).IsRequired();
             entity.Property(e => e.ConversationId).IsRequired();
         });

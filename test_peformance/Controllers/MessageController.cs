@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
 using test_peformance.Contants;
 using test_peformance.Entities;
 
@@ -55,19 +56,22 @@ public class MessageController : ControllerBase
     [HttpPost]
     public async Task<ActionResult<Message>> CreateMessage(Message message)
     {
+        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "anonymous";    
+
         message.CreatedAt = DateTime.UtcNow;
-        
+        message.CreatedBy = userId;
+
         // Update conversation's LastActivityAt
         var conversation = await _context.Conversations.FindAsync(message.ConversationId);
         if (conversation == null)
         {
             return BadRequest("Invalid ConversationId");
         }
-        var userId = User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.NameIdentifier)?.Value ?? "anonymous";    
         conversation.LastActivityAt = DateTime.UtcNow;
+        
         _context.Messages.Add(message);
         await _context.SaveChangesAsync();
-        await _chatHub.Clients.User("userId").SendAsync("ReceiveMessage","cccccc");
+        await _chatHub.Clients.User(userId).SendAsync("ReceiveMessage", JsonConvert.SerializeObject(message));
         return CreatedAtAction(nameof(GetMessage), new { id = message.Id }, message);
     }
 
