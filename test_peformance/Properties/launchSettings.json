@@ -1,14 +1,28 @@
 ﻿{
   "profiles": {
-    "http": {
+    "Silo0": {
       "commandName": "Project",
-      "dotnetRunMessages": true,
-      "launchBrowser": false,
-      "launchUrl": "swagger",
-      "applicationUrl": "http://localhost:5000",
       "environmentVariables": {
+        "SILO_INDEX": "4",
         "ASPNETCORE_ENVIRONMENT": "Development"
-      }
+      },
+      "applicationUrl": "http://localhost:5004"
+    },
+    "Silo1": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SILO_INDEX": "1",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5001"
+    },
+    "Silo2": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SILO_INDEX": "2",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5002"
     }
   }
 }

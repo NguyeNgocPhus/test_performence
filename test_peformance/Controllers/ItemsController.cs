@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using test_peformance.Abstractions;
 
 namespace test_peformance.Controllers;
 
@@ -9,34 +10,24 @@ public class ItemsController : ControllerBase
     private static int _items = 0; // Tài nguyên chung
 
     private readonly ILogger<ItemsController> _logger;
+    private readonly IClusterClient _client;
+
 
     // Tạo một SemaphoreSlim duy nhất cho cả hai API
     private static SemaphoreSlim _semaphore = new SemaphoreSlim(1, 1); // Chỉ cho phép 1 request cùng lúc
 
-    public ItemsController(ILogger<ItemsController> logger)
+    public ItemsController(ILogger<ItemsController> logger,  IClusterClient client)
     {
         _logger = logger;
+        _client = client;
     }
 
     [HttpGet("increment")]
-    public async Task<IActionResult> AddItem()
+    public async Task<IActionResult> AddItem([FromQuery] string productId)
     {
-        // var a = () => { _items += 1; };
-        //
-        // var thread1 = new Thread(() => { _items++; });
-        // thread1.Priority = ThreadPriority.BelowNormal;
-
-        await _semaphore.WaitAsync();
-        try
-        {
-            _items += 1;
-            _logger.LogInformation($"increment {_items} items");
-            return Ok("Item increment");
-        }
-        finally
-        {
-            _semaphore.Release(); // Giải phóng quyền truy cập
-        }
+       var grain = _client.GetGrain<IProductGrain>(productId);
+       var result = await grain.ReturnStateAsync();
+       return Ok(result);
     }
 
     [HttpGet("decrement")]

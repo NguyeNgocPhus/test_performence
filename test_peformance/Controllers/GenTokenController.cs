@@ -10,19 +10,19 @@ namespace test_peformance.Controllers;
 public class GenTokenController : Controller
 {
     private readonly IJwtTokenService _jwtTokenService;
-     private readonly RedisCacheService _cacheService;
+     // private readonly RedisCacheService _cacheService;
 
-    public GenTokenController(IJwtTokenService jwtTokenService, RedisCacheService cacheService)
+    public GenTokenController(IJwtTokenService jwtTokenService)
     {
         _jwtTokenService = jwtTokenService;
-        _cacheService = cacheService;
+        // _cacheService = cacheService;
     }
 
     [HttpPost]
     public async Task<ActionResult> Login([FromBody] LoginRequest request)
     {
         var email = request.Email;
-        await _cacheService.SetAsync(email, request.Password);
+        // await _cacheService.SetAsync(email, request.Password);
         
         var claims = new List<Claim>
         {
