@@ -124,7 +124,7 @@ builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddSingleton<InMemoryMessageQueue>();
 builder.Services.AddSingleton<IMessageQueueService, MessageQueueService>();
 builder.Services.AddSingleton<IEventBus, EventBus>();
-// builder.Services.AddHostedService<IntegrationEventProcessJob>();
+builder.Services.AddHostedService<GrainBackgroundService>();
 
 
 var app = builder.Build();
