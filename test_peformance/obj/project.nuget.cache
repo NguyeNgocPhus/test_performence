@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "crFe1b8NsRU=",
+  "dgSpecHash": "HbQWTBrLsd8=",
   "success": true,
   "projectFilePath": "/Users/phunn/Documents/Code/test_peformance/test_peformance/test_peformance.csproj",
   "expectedPackageFiles": [
@@ -94,9 +94,9 @@
     "/Users/phunn/.nuget/packages/orleans.clustering.redis/7.0.0/orleans.clustering.redis.7.0.0.nupkg.sha512",
     "/Users/phunn/.nuget/packages/orleansdashboard/7.2.2/orleansdashboard.7.2.2.nupkg.sha512",
     "/Users/phunn/.nuget/packages/orleansdashboard.core/7.2.2/orleansdashboard.core.7.2.2.nupkg.sha512",
-    "/Users/phunn/.nuget/packages/pipelines.sockets.unofficial/2.2.2/pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/pipelines.sockets.unofficial/2.2.8/pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
     "/Users/phunn/.nuget/packages/rabbitmq.client/6.8.1/rabbitmq.client.6.8.1.nupkg.sha512",
-    "/Users/phunn/.nuget/packages/stackexchange.redis/2.6.90/stackexchange.redis.2.6.90.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/stackexchange.redis/2.8.31/stackexchange.redis.2.8.31.nupkg.sha512",
     "/Users/phunn/.nuget/packages/swashbuckle.aspnetcore/6.5.0/swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "/Users/phunn/.nuget/packages/swashbuckle.aspnetcore.swagger/6.5.0/swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "/Users/phunn/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.5.0/swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",

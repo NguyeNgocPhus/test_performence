@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using test_peformance.Abstractions;
+using test_peformance.Entities;
 using test_peformance.Grains;
 
 namespace test_peformance.Controllers;
@@ -33,26 +34,18 @@ public class ItemsController : ControllerBase
         return Ok(result);
     }
 
-    [HttpGet("decrement")]
-    public async Task<IActionResult> GetItems()
+    [HttpPost("decrement")]
+    public async Task<IActionResult> GetItems([FromBody] UpdateUnreadConversation request)
     {
-        try
-        {
-            await _semaphore.WaitAsync();
-            _items -= 1;
-            _logger.LogInformation($"decrement {_items} items");
-            return Ok("Item decrement");
-        }
-        finally
-        {
-            _semaphore.Release(); // Giải phóng quyền truy cập
-        }
+        var grain =  _grainFactory.GetGrain<IUnreadGrain>(string.Empty);
+        await grain.UpdateUnreadConversation(request);
+        return Ok();
     }
 
     [HttpGet("hello")]
     public async Task<IActionResult> Hello([FromQuery] string message)
     {
-        var grain = _grainFactory.GetGrain<IHelloGrain>(String.Empty);
+        var grain = _grainFactory.GetGrain<IHelloGrain>(message);
         await grain.SendUpdateMessage(message);
         return Ok();
     }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using test_peformance.Contants;
 using test_peformance.Entities;
+using test_peformance.Grains;
 
 namespace test_peformance.Controllers;
 
@@ -16,10 +17,14 @@ public class MessageController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
     private readonly IHubContext<ChatHub> _chatHub;
-    public MessageController(ApplicationDbContext context, IHubContext<ChatHub> chatHub)
+    private readonly IGrainFactory _grainFactory;
+
+    
+    public MessageController(ApplicationDbContext context, IHubContext<ChatHub> chatHub, IGrainFactory grainFactory)
     {
         _context = context;
         _chatHub = chatHub;
+        _grainFactory = grainFactory;
     }
 
     [HttpGet]
@@ -71,7 +76,7 @@ public class MessageController : ControllerBase
         
         _context.Messages.Add(message);
         await _context.SaveChangesAsync();
-        await _chatHub.Clients.User(userId).SendAsync("ReceiveMessage", JsonConvert.SerializeObject(message));
+
         return CreatedAtAction(nameof(GetMessage), new { id = message.Id }, message);
     }
 

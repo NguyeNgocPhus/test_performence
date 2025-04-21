@@ -23,34 +23,20 @@ builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
 var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
 builder.Host.UseOrleans((_, builder) =>
 {
-    var dashboardPort = 8080 + siloIndex; 
+    var dashboardPort = 8080 + siloIndex;
     builder
         .Configure<EndpointOptions>(options =>
         {
             // Mỗi silo cần có cổng khác nhau
-            options.SiloPort = 11111+ siloIndex; // Cổng lắng nghe silo 1
-            options.GatewayPort = 30000+ 1; // Cổng lắng nghe client tới silo 1
+            options.SiloPort = 11111 + siloIndex; // Cổng lắng nghe silo 1
+            options.GatewayPort = 30000 + 1; // Cổng lắng nghe client tới silo 1
             options.AdvertisedIPAddress = IPAddress.Loopback;
         })
+        .AddMemoryGrainStorageAsDefault()
         .UseRedisClustering(options =>
         {
             options.ConnectionString = redisConnection; // Redis connection
-        })
-        .AddRedisGrainStorage("shopping-cart", options =>
-        {
-            options.ConfigurationOptions = new StackExchange.Redis.ConfigurationOptions
-            {
-                EndPoints = { redisConnection }
-            };
-        })
-        .AddStartupTask<SeedProductStoreTask>().UseDashboard(options =>
-        {
-            options.Host = "*"; // Hoặc "localhost"
-            options.Port = dashboardPort;
-            options.HostSelf = true;
-            options.CounterUpdateIntervalMs = 1000;
-            options.HideTrace = false;
-        });;
+        });
 });
 
 

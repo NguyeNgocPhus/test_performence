@@ -1601,7 +1601,7 @@
           "lib/net7.0/OrleansDashboard.Core.dll": {}
         }
       },
-      "Pipelines.Sockets.Unofficial/2.2.2": {
+      "Pipelines.Sockets.Unofficial/2.2.8": {
         "type": "package",
         "dependencies": {
           "System.IO.Pipelines": "5.0.1"
@@ -1634,18 +1634,19 @@
           }
         }
       },
-      "StackExchange.Redis/2.6.90": {
+      "StackExchange.Redis/2.8.31": {
         "type": "package",
         "dependencies": {
-          "Pipelines.Sockets.Unofficial": "2.2.2"
+          "Microsoft.Extensions.Logging.Abstractions": "6.0.0",
+          "Pipelines.Sockets.Unofficial": "2.2.8"
         },
         "compile": {
-          "lib/net5.0/StackExchange.Redis.dll": {
+          "lib/net6.0/StackExchange.Redis.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/net5.0/StackExchange.Redis.dll": {
+          "lib/net6.0/StackExchange.Redis.dll": {
             "related": ".xml"
           }
         }
@@ -4600,10 +4601,10 @@
         "orleansdashboard.core.nuspec"
       ]
     },
-    "Pipelines.Sockets.Unofficial/2.2.2": {
-      "sha512": "Bhk0FWxH1paI+18zr1g5cTL+ebeuDcBCR+rRFO+fKEhretgjs7MF2Mc1P64FGLecWp4zKCUOPzngBNrqVyY7Zg==",
+    "Pipelines.Sockets.Unofficial/2.2.8": {
+      "sha512": "zG2FApP5zxSx6OcdJQLbZDk2AVlN2BNQD6MorwIfV6gVj0RRxWPEp2LXAxqDGZqeNV1Zp0BNPcNaey/GXmTdvQ==",
       "type": "package",
-      "path": "pipelines.sockets.unofficial/2.2.2",
+      "path": "pipelines.sockets.unofficial/2.2.8",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4619,7 +4620,7 @@
         "lib/netstandard2.0/Pipelines.Sockets.Unofficial.xml",
         "lib/netstandard2.1/Pipelines.Sockets.Unofficial.dll",
         "lib/netstandard2.1/Pipelines.Sockets.Unofficial.xml",
-        "pipelines.sockets.unofficial.2.2.2.nupkg.sha512",
+        "pipelines.sockets.unofficial.2.2.8.nupkg.sha512",
         "pipelines.sockets.unofficial.nuspec"
       ]
     },
@@ -4640,10 +4641,10 @@
         "rabbitmq.client.nuspec"
       ]
     },
-    "StackExchange.Redis/2.6.90": {
-      "sha512": "OVmlUSvuCI4rMcSU1dI1h+U/6t2k8AL7TVD1kIrZ0eSDDrgNlKcsTlQhZU8u9ViU6F8AVOvFZnxDP69NyU/oUQ==",
+    "StackExchange.Redis/2.8.31": {
+      "sha512": "RCHVQa9Zke8k0oBgJn1Yl6BuYy8i6kv+sdMObiH60nOwD6QvWAjxdDwOm+LO78E8WsGiPqgOuItkz98fPS6haQ==",
       "type": "package",
-      "path": "stackexchange.redis/2.6.90",
+      "path": "stackexchange.redis/2.8.31",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4651,13 +4652,15 @@
         "lib/net461/StackExchange.Redis.xml",
         "lib/net472/StackExchange.Redis.dll",
         "lib/net472/StackExchange.Redis.xml",
-        "lib/net5.0/StackExchange.Redis.dll",
-        "lib/net5.0/StackExchange.Redis.xml",
+        "lib/net6.0/StackExchange.Redis.dll",
+        "lib/net6.0/StackExchange.Redis.xml",
+        "lib/net8.0/StackExchange.Redis.dll",
+        "lib/net8.0/StackExchange.Redis.xml",
         "lib/netcoreapp3.1/StackExchange.Redis.dll",
         "lib/netcoreapp3.1/StackExchange.Redis.xml",
         "lib/netstandard2.0/StackExchange.Redis.dll",
         "lib/netstandard2.0/StackExchange.Redis.xml",
-        "stackexchange.redis.2.6.90.nupkg.sha512",
+        "stackexchange.redis.2.8.31.nupkg.sha512",
         "stackexchange.redis.nuspec"
       ]
     },
@@ -6423,6 +6426,7 @@
       "Orleans.Clustering.Redis >= 7.0.0",
       "OrleansDashboard >= 7.2.2",
       "RabbitMQ.Client >= 6.8.1",
+      "StackExchange.Redis >= 2.8.31",
       "Swashbuckle.AspNetCore >= 6.5.0",
       "Thinktecture.EntityFrameworkCore.SqlServer >= 7.0.0"
     ]
@@ -6529,6 +6533,10 @@
           "RabbitMQ.Client": {
             "target": "Package",
             "version": "[6.8.1, )"
+          },
+          "StackExchange.Redis": {
+            "target": "Package",
+            "version": "[2.8.31, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -24,6 +24,7 @@
           "Orleans.Clustering.Redis": "7.0.0",
           "OrleansDashboard": "7.2.2",
           "RabbitMQ.Client": "6.8.1",
+          "StackExchange.Redis": "2.8.31",
           "Swashbuckle.AspNetCore": "6.5.0",
           "Thinktecture.EntityFrameworkCore.SqlServer": "7.0.0"
         },
@@ -325,7 +326,7 @@
           "Microsoft.Extensions.Caching.Abstractions": "7.0.0",
           "Microsoft.Extensions.Logging.Abstractions": "7.0.1",
           "Microsoft.Extensions.Options": "7.0.1",
-          "StackExchange.Redis": "2.6.90"
+          "StackExchange.Redis": "2.8.31"
         },
         "runtime": {
           "lib/net7.0/Microsoft.Extensions.Caching.StackExchangeRedis.dll": {
@@ -704,7 +705,7 @@
       "Microsoft.Orleans.Persistence.Redis/7.2.7": {
         "dependencies": {
           "Microsoft.Orleans.Runtime": "7.2.7",
-          "StackExchange.Redis": "2.6.90"
+          "StackExchange.Redis": "2.8.31"
         },
         "runtime": {
           "lib/net7.0/Orleans.Persistence.Redis.dll": {
@@ -895,7 +896,7 @@
           "Microsoft.Extensions.Options.ConfigurationExtensions": "7.0.0",
           "Microsoft.Orleans.Server": "7.2.7",
           "Newtonsoft.Json": "13.0.3",
-          "StackExchange.Redis": "2.6.90"
+          "StackExchange.Redis": "2.8.31"
         },
         "runtime": {
           "lib/net7.0/Orleans.Clustering.Redis.dll": {
@@ -930,14 +931,14 @@
           }
         }
       },
-      "Pipelines.Sockets.Unofficial/2.2.2": {
+      "Pipelines.Sockets.Unofficial/2.2.8": {
         "dependencies": {
           "System.IO.Pipelines": "7.0.0"
         },
         "runtime": {
           "lib/net5.0/Pipelines.Sockets.Unofficial.dll": {
             "assemblyVersion": "1.0.0.0",
-            "fileVersion": "2.2.2.34088"
+            "fileVersion": "2.2.8.1080"
           }
         }
       },
@@ -953,14 +954,15 @@
           }
         }
       },
-      "StackExchange.Redis/2.6.90": {
+      "StackExchange.Redis/2.8.31": {
         "dependencies": {
-          "Pipelines.Sockets.Unofficial": "2.2.2"
+          "Microsoft.Extensions.Logging.Abstractions": "7.0.1",
+          "Pipelines.Sockets.Unofficial": "2.2.8"
         },
         "runtime": {
-          "lib/net5.0/StackExchange.Redis.dll": {
+          "lib/net6.0/StackExchange.Redis.dll": {
             "assemblyVersion": "2.0.0.0",
-            "fileVersion": "2.6.90.64945"
+            "fileVersion": "2.8.31.52602"
           }
         }
       },
@@ -1913,12 +1915,12 @@
       "path": "orleansdashboard.core/7.2.2",
       "hashPath": "orleansdashboard.core.7.2.2.nupkg.sha512"
     },
-    "Pipelines.Sockets.Unofficial/2.2.2": {
+    "Pipelines.Sockets.Unofficial/2.2.8": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-Bhk0FWxH1paI+18zr1g5cTL+ebeuDcBCR+rRFO+fKEhretgjs7MF2Mc1P64FGLecWp4zKCUOPzngBNrqVyY7Zg==",
-      "path": "pipelines.sockets.unofficial/2.2.2",
-      "hashPath": "pipelines.sockets.unofficial.2.2.2.nupkg.sha512"
+      "sha512": "sha512-zG2FApP5zxSx6OcdJQLbZDk2AVlN2BNQD6MorwIfV6gVj0RRxWPEp2LXAxqDGZqeNV1Zp0BNPcNaey/GXmTdvQ==",
+      "path": "pipelines.sockets.unofficial/2.2.8",
+      "hashPath": "pipelines.sockets.unofficial.2.2.8.nupkg.sha512"
     },
     "RabbitMQ.Client/6.8.1": {
       "type": "package",
@@ -1927,12 +1929,12 @@
       "path": "rabbitmq.client/6.8.1",
       "hashPath": "rabbitmq.client.6.8.1.nupkg.sha512"
     },
-    "StackExchange.Redis/2.6.90": {
+    "StackExchange.Redis/2.8.31": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-OVmlUSvuCI4rMcSU1dI1h+U/6t2k8AL7TVD1kIrZ0eSDDrgNlKcsTlQhZU8u9ViU6F8AVOvFZnxDP69NyU/oUQ==",
-      "path": "stackexchange.redis/2.6.90",
-      "hashPath": "stackexchange.redis.2.6.90.nupkg.sha512"
+      "sha512": "sha512-RCHVQa9Zke8k0oBgJn1Yl6BuYy8i6kv+sdMObiH60nOwD6QvWAjxdDwOm+LO78E8WsGiPqgOuItkz98fPS6haQ==",
+      "path": "stackexchange.redis/2.8.31",
+      "hashPath": "stackexchange.redis.2.8.31.nupkg.sha512"
     },
     "Swashbuckle.AspNetCore/6.5.0": {
       "type": "package",
