@@ -1,0 +1,108 @@
+## Ignore Visual Studio temporary files, build results, and
+## user-specific files
+
+# Build results
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+*.log
+
+# .NET Core project lock file
+project.lock.json
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# User-specific files
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+
+# Visual Studio
+.vs/
+
+# ASP.NET Core secrets
+secrets.json
+
+# dotnet CLI
+artifacts/
+
+# StyleCop
+StyleCopReport.xml
+
+# Files built by Visual Studio
+*_i.c
+*_p.c
+*_h.h
+*.ilk
+*.meta
+*.obj
+*.iobj
+*.pch
+*.pdb
+*.ipdb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlh
+*.tli
+*.tmp
+*.tmp_proj
+*.log
+
+# Web publish
+publish/
+out/
+
+# NuGet
+*.nupkg
+packages/
+*.snupkg
+.nuget/
+# NuGet v3 folder-based project format
+**/global.json
+**/packages.json
+*.nuspec
+*.psmdcp
+
+# Entity Framework
+Migrations/
+
+# Resharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+
+# DotCover
+*.dotCover
+
+# TeamCity
+_TeamCity*
+
+# Azure Web App publish settings
+*.PublishSettings
+
+# IIS
+/.vs/config/applicationhost.config
+
+# Others
+*.dbmdl
+*.bak
+*.backup
