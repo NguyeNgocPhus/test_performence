@@ -1,6 +1,9 @@
+using EventBus.Abstractions;
+using IntegrationEventLogEF.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using test_peformance.Entities;
+using test_peformance.Event;
 
 namespace test_peformance.Controllers;
 
@@ -14,11 +17,12 @@ public class WeatherForecastController : ControllerBase
 
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly ApplicationDbContext _dbContext;
-
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext)
+    private readonly IEventBus _eventBus;
+    public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext, IEventBus eventBus)
     {
         _logger = logger;
         _dbContext = dbContext;
+        _eventBus = eventBus;
     }
 
     
@@ -27,12 +31,19 @@ public class WeatherForecastController : ControllerBase
     [Route("test")]
     public async Task<IActionResult> Get()
     {
-
-        var person = await _dbContext.Departments.SingleAsync(b => b.Id == 1);
-        person.Name = "phunn";
-        // person.Version = Guid.NewGuid().ToByteArray();
-        await _dbContext.SaveChangesAsync();
-        return Ok(person);
+        try
+        {
+            _eventBus.Publish(new TestEvent()
+            {
+                Name = "Phus"
+            });
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "ERROR publishing integration event: {IntegrationEventId} from {AppName}");
+        }
+        
+        return Ok();
     }
 
     [HttpPost]
