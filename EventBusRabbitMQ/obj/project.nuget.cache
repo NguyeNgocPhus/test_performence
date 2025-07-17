@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "dgSpecHash": "zMA0lrBbrkc=",
+  "success": true,
+  "projectFilePath": "/Users/phunn/Documents/Code/test_peformance/EventBusRabbitMQ/EventBusRabbitMQ.csproj",
+  "expectedPackageFiles": [
+    "/Users/phunn/.nuget/packages/autofac/8.3.0/autofac.8.3.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.dependencyinjection/5.0.0/microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/5.0.0/microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.logging/5.0.0/microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.logging.abstractions/5.0.0/microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.options/5.0.0/microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/microsoft.extensions.primitives/5.0.0/microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/polly/8.6.2/polly.8.6.2.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/polly.core/8.6.2/polly.core.8.6.2.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/rabbitmq.client/6.8.1/rabbitmq.client.6.8.1.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/system.diagnostics.diagnosticsource/8.0.1/system.diagnostics.diagnosticsource.8.0.1.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/system.memory/4.5.5/system.memory.4.5.5.nupkg.sha512",
+    "/Users/phunn/.nuget/packages/system.threading.channels/7.0.0/system.threading.channels.7.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

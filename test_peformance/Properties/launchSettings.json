@@ -1,0 +1,12 @@
+﻿{
+  "profiles": {
+    "Silo0": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "SILO_INDEX": "4",
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "http://localhost:5000"
+    }
+  }
+}
