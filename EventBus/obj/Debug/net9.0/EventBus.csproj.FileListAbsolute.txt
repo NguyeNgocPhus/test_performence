@@ -1,0 +1,13 @@
+/Users/phunn/Documents/Code/test_peformance/EventBus/bin/Debug/net9.0/EventBus.deps.json
+/Users/phunn/Documents/Code/test_peformance/EventBus/bin/Debug/net9.0/EventBus.dll
+/Users/phunn/Documents/Code/test_peformance/EventBus/bin/Debug/net9.0/EventBus.pdb
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.csproj.AssemblyReference.cache
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.GeneratedMSBuildEditorConfig.editorconfig
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.AssemblyInfoInputs.cache
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.AssemblyInfo.cs
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.csproj.CoreCompileInputs.cache
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.sourcelink.json
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.dll
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/refint/EventBus.dll
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/EventBus.pdb
+/Users/phunn/Documents/Code/test_peformance/EventBus/obj/Debug/net9.0/ref/EventBus.dll
