@@ -44,13 +44,25 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
-            "Microsoft.Extensions.DependencyInjection.Abstractions": {
+            "Autofac": {
               "target": "Package",
-              "version": "[9.0.7, )"
+              "version": "[8.3.0, )"
             },
-            "Microsoft.Extensions.Options": {
+            "Microsoft.CSharp": {
               "target": "Package",
-              "version": "[9.0.7, )"
+              "version": "[4.7.0, )"
+            },
+            "Microsoft.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Polly": {
+              "target": "Package",
+              "version": "[8.6.2, )"
+            },
+            "RabbitMQ.Client": {
+              "target": "Package",
+              "version": "[6.8.1, )"
             }
           },
           "imports": [
@@ -182,6 +194,9 @@
             "projectReferences": {
               "/Users/phunn/Documents/Code/test_peformance/EventBus/EventBus.csproj": {
                 "projectPath": "/Users/phunn/Documents/Code/test_peformance/EventBus/EventBus.csproj"
+              },
+              "/Users/phunn/Documents/Code/test_peformance/EventBusRabbitMQ/EventBusRabbitMQ.csproj": {
+                "projectPath": "/Users/phunn/Documents/Code/test_peformance/EventBusRabbitMQ/EventBusRabbitMQ.csproj"
               }
             }
           }

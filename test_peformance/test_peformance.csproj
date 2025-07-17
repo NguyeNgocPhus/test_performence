@@ -36,16 +36,24 @@
       <Folder Include="Migrations\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
-      <ProjectReference Include="..\EventBus\EventBus.csproj" />
-      <ProjectReference Include="..\IntegrationEventLogEF\IntegrationEventLogEF.csproj" />
-    </ItemGroup>
+    
 
     <ItemGroup>
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Reference Include="EventBus">
+        <HintPath>bin\Debug\net9.0\EventBus.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\EventBusRabbitMQ\EventBusRabbitMQ.csproj" />
+      <ProjectReference Include="..\EventBus\EventBus.csproj" />
+      <ProjectReference Include="..\IntegrationEventLogEF\IntegrationEventLogEF.csproj" />
     </ItemGroup>
 
 </Project>
