@@ -5,6 +5,7 @@ using EventBus.Abstractions;
 using EventBusRabbitMQ;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMQ.Client;
 using test_peformance;
@@ -132,10 +133,18 @@ builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
 });
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
+
+
 var app = builder.Build();
 var eventBus = app.Services.GetRequiredService<IEventBus>();
 eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads")),
+    RequestPath = "/uploads"
+});
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

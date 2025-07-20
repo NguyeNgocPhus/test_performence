@@ -1,8 +1,5 @@
 using EventBus.Abstractions;
-using IntegrationEventLogEF.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using test_peformance.Entities;
 using test_peformance.Event;
 
 namespace test_peformance.Controllers;
@@ -18,11 +15,18 @@ public class WeatherForecastController : ControllerBase
     private readonly ILogger<WeatherForecastController> _logger;
     private readonly ApplicationDbContext _dbContext;
     private readonly IEventBus _eventBus;
-    public WeatherForecastController(ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext, IEventBus eventBus)
+    private readonly IWebHostEnvironment _env;
+    private readonly string _uploadPath;
+    public WeatherForecastController(IWebHostEnvironment env,ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext, IEventBus eventBus)
     {
         _logger = logger;
         _dbContext = dbContext;
         _eventBus = eventBus;
+        _env = env;
+        _uploadPath = Path.Combine(_env.WebRootPath ?? "wwwroot", "uploads");
+
+        if (!Directory.Exists(_uploadPath))
+            Directory.CreateDirectory(_uploadPath);
     }
 
     
@@ -47,18 +51,21 @@ public class WeatherForecastController : ControllerBase
     }
 
     [HttpPost]
-    [Route("create")]
-    public async Task<IActionResult> Create()
+    [Route("file")]
+    public async Task<IActionResult> UploadFile(IFormFile file)
     {
+        if (file == null || file.Length == 0)
+            return BadRequest("File is empty or missing.");
 
-        var person = new Department()
+        var fileName = Path.GetFileName(file.FileName);
+        var savePath = Path.Combine(_uploadPath, fileName);
+
+        await using (var stream = new FileStream(savePath, FileMode.Create))
         {
-            Id = 1,
-            Name = "phunn",
-            // Version = Guid.NewGuid().ToByteArray()
-        };
-        _dbContext.Add(person);
-        await _dbContext.SaveChangesAsync();
-        return Ok(person);
+            await file.CopyToAsync(stream);
+        }
+
+        var fileUrl = $"{Request.Scheme}://{Request.Host}/uploads/{fileName}";
+        return Ok(new { file = fileUrl });
     }
 }
