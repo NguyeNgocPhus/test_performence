@@ -39,7 +39,7 @@ builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
 // string redisConnection  = builder.Configuration.GetConnectionString("Redis");
 // builder.Services.AddSingleton(new RedisCacheService(redisConnection));
 
-//
+///
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
