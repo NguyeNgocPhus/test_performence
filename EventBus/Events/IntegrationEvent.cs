@@ -1,9 +1,8 @@
-using System.Text.Json.Serialization;
 
 namespace EventBus.Events;
 
-public record IntegrationEvent
-{        
+public class IntegrationEvent
+{
     public IntegrationEvent()
     {
         Id = Guid.NewGuid();
@@ -22,4 +21,6 @@ public record IntegrationEvent
 
     [JsonInclude]
     public DateTime CreationDate { get; private init; }
+    [JsonInclude]
+    public string TraceId { get; set; }
 }
