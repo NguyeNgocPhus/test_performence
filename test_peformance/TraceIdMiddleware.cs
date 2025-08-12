@@ -13,15 +13,17 @@ public class RequestLoggingMiddleware
 
     public async Task InvokeAsync(HttpContext context)
     {
-        var traceId = Activity.Current?.TraceId.ToString() ?? context.TraceIdentifier;
+        var traceId = context.TraceIdentifier;
         // using (LogContext.PushProperty("TraceId", traceId))
         // {
         var stopwatch = Stopwatch.StartNew();
-
-        // Log request
-        Log.Information("HTTP {Method} {Path} started",
-            context.Request.Method,
-            context.Request.Path);
+        if (context.Request.Path != "/health")
+        {
+            // Log request
+            Log.Information("HTTP {Method} {Path} started",
+                context.Request.Method,
+                context.Request.Path);
+        }
 
         try
         {
@@ -30,13 +32,19 @@ public class RequestLoggingMiddleware
         finally
         {
             stopwatch.Stop();
-
-            // Log response
-            Log.Information("HTTP {Method} {Path} responded {StatusCode} in {Duration}ms",
-                context.Request.Method,
-                context.Request.Path,
-                context.Response.StatusCode,
-                stopwatch.ElapsedMilliseconds);
+            
+            if (context.Request.Path != "/health")
+            {
+                // Log response
+                Log.Information("HTTP {Method} {Path} responded {StatusCode} in {Duration}ms",
+                    context.Request.Method,
+                    context.Request.Path,
+                    context.Response.StatusCode,
+                    stopwatch.ElapsedMilliseconds);
+            }
+            
+            // Gắn vào response header
+            context.Response.Headers["Request-Id"] = traceId;
         }
         // }
     }
