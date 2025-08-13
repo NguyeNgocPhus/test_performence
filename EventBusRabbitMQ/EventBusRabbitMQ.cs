@@ -36,7 +36,7 @@ public class EventBusRabbitMq : IEventBus, IDisposable
         {
             _persistentConnection.TryConnect();
         }
-
+// comment
         using var channel = _persistentConnection.CreateModel();
         channel.QueueUnbind(queue: _queueName,
             exchange: BROKER_NAME,
