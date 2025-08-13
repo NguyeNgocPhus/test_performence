@@ -2,7 +2,7 @@ using EventBus.Abstractions;
 using EventBus.Events;
 
 namespace EventBus;
-
+//
 public interface IEventBusSubscriptionsManager
 {
     bool IsEmpty { get; }
