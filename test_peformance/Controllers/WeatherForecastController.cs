@@ -1,5 +1,7 @@
 using EventBus.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
+using test_peformance.Abstractions;
 using test_peformance.Event;
 
 namespace test_peformance.Controllers;
@@ -11,15 +13,12 @@ public class WeatherForecastController : ControllerBase
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
-
-    private readonly ILogger<WeatherForecastController> _logger;
     private readonly ApplicationDbContext _dbContext;
     private readonly IEventBus _eventBus;
     private readonly IWebHostEnvironment _env;
     private readonly string _uploadPath;
     public WeatherForecastController(IWebHostEnvironment env,ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext, IEventBus eventBus)
     {
-        _logger = logger;
         _dbContext = dbContext;
         _eventBus = eventBus;
         _env = env;
@@ -37,14 +36,20 @@ public class WeatherForecastController : ControllerBase
     {
         try
         {
+            var traceId = HttpContext.TraceIdentifier;
+            Log.Information("Publishing integration event: {IntegrationEventId} from {AppName}", Guid.NewGuid(), _env.ApplicationName);
+
             _eventBus.Publish(new TestEvent()
             {
-                Name = "Phus"
+                Name = "Phus",
+                TraceId = traceId   
             });
+            Log.Information("Publishing integration event success");
+
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "ERROR publishing integration event: {IntegrationEventId} from {AppName}");
+            Log.Error(ex, "ERROR publishing integration event: {IntegrationEventId} from {AppName}");
         }
         
         return Ok();
@@ -54,6 +59,7 @@ public class WeatherForecastController : ControllerBase
     [Route("file")]
     public async Task<IActionResult> UploadFile(IFormFile file)
     {
+        Log.Information("Uploading file {File}", file.FileName);
         if (file == null || file.Length == 0)
             return BadRequest("File is empty or missing.");
 

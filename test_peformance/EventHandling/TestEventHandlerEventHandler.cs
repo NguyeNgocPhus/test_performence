@@ -1,20 +1,13 @@
 ﻿using System.Text.Json;
 using EventBus.Abstractions;
+using Serilog;
+using Serilog.Context;
 using test_peformance.Event;
 
 namespace test_peformance.EventHandling;
+
 public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
 {
-    
-    private readonly ILogger<TestEventHandlerEventHandler> _logger;
-
-    public TestEventHandlerEventHandler(
-      
-        ILogger<TestEventHandlerEventHandler> logger)
-    {
-     
-        _logger = logger ?? throw new System.ArgumentNullException(nameof(logger));
-    }
 
     /// <summary>
     /// Event handler which confirms that the grace period
@@ -26,6 +19,8 @@ public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
     /// <returns></returns>
     public async Task Handle(TestEvent @event)
     {
-        _logger.LogInformation($"GracePeriodConfirmed Integration Event {JsonSerializer.Serialize(@event)}");
+        LogContext.PushProperty("RequestId",  @event.TraceId);
+
+        Log.Information($"GracePeriodConfirmed Integration Event {JsonSerializer.Serialize(@event)}");
     }
 }

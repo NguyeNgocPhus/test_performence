@@ -1,5 +1,3 @@
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
 using EventBus;
 using EventBus.Abstractions;
 using EventBusRabbitMQ;
@@ -8,13 +6,43 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
 using RabbitMQ.Client;
+using Serilog;
+using Serilog.Context;
+using Serilog.Events;
 using test_peformance;
 using test_peformance.Abstractions;
 using test_peformance.Event;
 using test_peformance.EventHandling;
 
 var builder = WebApplication.CreateBuilder(args);
-
+// Configure Serilog with filtering and TraceId formatting
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    // Filter out noisy framework logs
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Information)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Mvc", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Routing", LogEventLevel.Warning)
+    .MinimumLevel.Override("System", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Authorization", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.Hosting.Diagnostics", LogEventLevel.Warning)
+    .MinimumLevel.Override("Microsoft.AspNetCore.HttpsPolicy", LogEventLevel.Error)
+    .Enrich.FromLogContext()
+    // .Enrich.With(new TraceIdEnricher("SYSTEM"))
+    .WriteTo.Console(
+        outputTemplate:
+        "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] [TraceId : {RequestId}] {Message:lj}{NewLine}{Exception}",
+        theme: Serilog.Sinks.SystemConsole.Themes.AnsiConsoleTheme.Code)
+    .WriteTo.File("logs/log-.txt",
+        rollingInterval: RollingInterval.Day,
+        outputTemplate:
+        "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] [TraceId : {RequestId}] {Message:lj}{NewLine}{Exception}")
+    .CreateLogger();
+LogContext.PushProperty("RequestId", "SYSTEM");
+builder.Host.UseSerilog();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -111,6 +139,7 @@ builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     {
         retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
     }
+
     logger.LogInformation($"EventBus connection string: {builder.Configuration["EventBusConnection"]}");
     return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
 });
@@ -128,12 +157,12 @@ builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
         retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
     }
 
-    return new EventBusRabbitMq(rabbitMqPersistentConnection, logger, iLifetimeScope, eventBusSubscriptionsManager,
+    return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,
         subscriptionClientName, retryCount);
 });
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
-
 
 var app = builder.Build();
 var eventBus = app.Services.GetRequiredService<IEventBus>();
@@ -151,6 +180,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<RequestLoggingMiddleware>();
 app.MapHealthChecks("/health");
 app.UseCors();
 app.UseRouting();
@@ -160,4 +191,17 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+try
+{
+    Log.Information("Starting web host");
+    await app.RunAsync();
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.ToString());
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
