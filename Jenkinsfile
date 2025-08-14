@@ -14,9 +14,31 @@ pipeline {
           }
             steps {
                 echo 'Setting up permission ...'
-               
+                
             }
         }
-     
+        stage('Build') {
+                 when {
+                          	branch 'master'
+                 }
+                 steps{
+                    echo 'Building the application...'
+                   sh 'docker build -t nguyenphu/testperformance:v10 .'
+                   sh 'docker push nguyenphu/testperformance:v10'
+                 }
+               
+                // Add build commands here
+            }
+            stage('Test') {
+                 when {
+                                          	branch 'master'
+                                 }
+                echo 'Running tests...'
+                // Add test commands here
+            }
+            stage('Deploy') {
+                echo 'Deploying the application...'
+                // Add deployment commands here
+            }
     }
 }
