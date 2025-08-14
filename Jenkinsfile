@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'docker' }
     environment {
         SERVICE_NAME = 'test'
         EVN_NAME = 'production'
