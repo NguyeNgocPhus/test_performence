@@ -14,16 +14,13 @@ pipeline {
                 echo 'Branch is...'
                 script {
                     sh 'git branch'
-                }
+                }`
             
                 echo 'Setting up permission ...'
             }
         }
         
         stage('Build') {
-            when {
-                branch 'dev'
-            }
             steps {
                 echo 'Building the application...'
                 script {
@@ -35,9 +32,6 @@ pipeline {
         }
         
         stage('Test') {
-            when {
-                branch 'dev'
-            }
             steps {
                 echo 'Running tests...'
                 // Add your test commands here
@@ -45,9 +39,6 @@ pipeline {
         }
         
         stage('Deploy') {
-            when {
-                branch 'dev'
-            }
             steps {
                 echo 'Deploying the application...'
                 // Add your deployment commands here
