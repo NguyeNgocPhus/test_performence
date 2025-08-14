@@ -14,9 +14,7 @@ pipeline {
                 echo 'Branch is...'
                 script {
                     sh 'git branch'
-                }`
-            
-                echo 'Setting up permission ...'
+                }
             }
         }
         
