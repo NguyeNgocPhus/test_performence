@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('SETTING UP PERMISSIONS PHASE') {
           when {
-          	branch 'master'
+          	branch 'dev'
           }
             steps {
                 echo 'Setting up permission ...'
@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Build') {
                  when {
-                          	branch 'master'
+                          	branch 'dev'
                  }
                  steps{
                     echo 'Building the application...'
@@ -31,7 +31,7 @@ pipeline {
             }
             stage('Test') {
                  when {
-                                          	branch 'master'
+                                          	branch 'dev'
                                  }
                 echo 'Running tests...'
                 // Add test commands here
