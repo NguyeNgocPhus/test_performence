@@ -10,10 +10,12 @@ pipeline {
     }
     stages {
         stage('SETTING UP PERMISSIONS PHASE') {
-            when {
-                branch 'dev'
-            }
             steps {
+                echo 'Branch is...'
+                script {
+                    sh 'git branch'
+                }
+            
                 echo 'Setting up permission ...'
             }
         }
