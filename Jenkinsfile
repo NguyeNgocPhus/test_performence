@@ -10,18 +10,18 @@ pipeline {
         timeout(time: 1, unit: 'HOURS')
     }
     stages {
-        stage('Validate Branch') {
-            steps {
-                echo 'Checking branch...'
-                script {
-                    env.BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-                    echo "Current branch: ${env.BRANCH_NAME}"
-                    if (env.BRANCH_NAME != 'Dev') {
-                        error "This pipeline can only run on the 'Dev' branch. Current branch: ${env.BRANCH_NAME}"
-                    }
-                }
-            }
-        }
+        // stage('Validate Branch') {
+        //     steps {
+        //         echo 'Checking branch...'
+        //         script {
+        //             env.BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+        //             echo "Current branch: ${env.BRANCH_NAME}"
+        //             if (env.BRANCH_NAME != 'Dev') {
+        //                 error "This pipeline can only run on the 'Dev' branch. Current branch: ${env.BRANCH_NAME}"
+        //             }
+        //         }
+        //     }
+        // }
         
         stage('Build') {
             steps {
