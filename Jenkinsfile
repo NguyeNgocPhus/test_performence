@@ -77,8 +77,10 @@ pipeline {
     
     post {
         always {
-            // Clean up any dangling images
-            sh 'docker system prune -f'
+            script {
+                // Clean up any dangling images
+                sh 'docker system prune -f'
+            }
         }
     }
 }
