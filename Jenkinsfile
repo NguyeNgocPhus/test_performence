@@ -13,28 +13,24 @@ pipeline {
         stage('Validate Branch') {
             steps {
                 echo 'Checking branch...'
-                script {
-                    def branch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                def branch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
                     echo "Current branch: ${branch}"
                     if (branch != 'Dev') {
                         error "This pipeline can only run on the 'Dev' branch. Current branch: ${branch}"
                     }
-                }
             }
         }
         
         stage('Build') {
             steps {
                 echo 'Building the application...'
-                script {
-                    // Get the commit hash for tagging
+                // Get the commit hash for tagging
                     def gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
                     def dockerTag = "v${gitCommit}"
                     
                     // Build Docker image
                     sh "docker build -t ${DOCKER_IMAGE_NAME}:${dockerTag} ."
                     sh "docker tag ${DOCKER_IMAGE_NAME}:${dockerTag} ${DOCKER_IMAGE_NAME}:latest"
-                }
             }
         }
         
@@ -46,26 +42,26 @@ pipeline {
             }
         }
         
-        stage('Publish Docker Image') {
-            steps {
-                echo 'Publishing Docker image to registry...'
-                script {
-                    // Login to Docker registry
-                    sh 'docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+        // stage('Publish Docker Image') {
+        //     steps {
+        //         echo 'Publishing Docker image to registry...'
+        //         script {
+        //             // Login to Docker registry
+        //             sh 'docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
                     
-                    // Get the commit hash for tagging
-                    def gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    def dockerTag = "v${gitCommit}"
+        //             // Get the commit hash for tagging
+        //             def gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+        //             def dockerTag = "v${gitCommit}"
                     
-                    // Push both tagged and latest images
-                    sh "docker push ${DOCKER_IMAGE_NAME}:${dockerTag}"
-                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
+        //             // Push both tagged and latest images
+        //             sh "docker push ${DOCKER_IMAGE_NAME}:${dockerTag}"
+        //             sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                     
-                    // Logout for security
-                    sh 'docker logout'
-                }
-            }
-        }
+        //             // Logout for security
+        //             sh 'docker logout'
+        //         }
+        //     }
+        // }
         
         stage('Deploy') {
             steps {
@@ -75,10 +71,10 @@ pipeline {
         }
     }
     
-    post {
-        always {
-            // Clean up any dangling images
-            sh 'docker system prune -f'
-        }
-    }
+    // post {
+    //     always {
+    //         // Clean up any dangling images
+    //         sh 'docker system prune -f'
+    //     }
+    // }
 }
