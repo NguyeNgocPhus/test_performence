@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Validate Branch') {
             steps {
-                echo 'Checking branch...'
+                echo 'Checking branch......'
                 def branch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
                     echo "Current branch: ${branch}"
                     if (branch != 'Dev') {
