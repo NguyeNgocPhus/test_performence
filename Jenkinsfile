@@ -14,10 +14,10 @@ pipeline {
             steps {
                 echo 'Checking branch...'
                 script {
-                    def branch = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
-                    echo "Current branch: ${branch}"
-                    if (branch != 'Dev') {
-                        error "This pipeline can only run on the 'Dev' branch. Current branch: ${branch}"
+                    env.BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
+                    echo "Current branch: ${env.BRANCH_NAME}"
+                    if (env.BRANCH_NAME != 'Dev') {
+                        error "This pipeline can only run on the 'Dev' branch. Current branch: ${env.BRANCH_NAME}"
                     }
                 }
             }
@@ -28,12 +28,12 @@ pipeline {
                 echo 'Building the application...'
                 script {
                     // Get the commit hash for tagging
-                    def gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    def dockerTag = "v${gitCommit}"
+                    env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.DOCKER_TAG = "v${env.GIT_COMMIT}"
                     
                     // Build Docker image
-                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${dockerTag} ."
-                    sh "docker tag ${DOCKER_IMAGE_NAME}:${dockerTag} ${DOCKER_IMAGE_NAME}:latest"
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
+                    sh "docker tag ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ${DOCKER_IMAGE_NAME}:latest"
                 }
             }
         }
@@ -54,11 +54,11 @@ pipeline {
                     sh 'docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
                     
                     // Get the commit hash for tagging
-                    def gitCommit = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    def dockerTag = "v${gitCommit}"
+                    env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.DOCKER_TAG = "v${env.GIT_COMMIT}"
                     
                     // Push both tagged and latest images
-                    sh "docker push ${DOCKER_IMAGE_NAME}:${dockerTag}"
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
                     sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                     
                     // Logout for security
