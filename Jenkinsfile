@@ -74,13 +74,5 @@ pipeline {
             }
         }
     }
-    
-    post {
-        always {
-            script {
-                // Clean up any dangling images
-                sh 'docker system prune -f'
-            }
-        }
-    }
+
 }
