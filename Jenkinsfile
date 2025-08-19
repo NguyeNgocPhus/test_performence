@@ -32,8 +32,8 @@ pipeline {
                     env.DOCKER_TAG = "v${env.GIT_COMMIT}"
                     
                     // Build Docker image
-                    sh "sudo docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
-                    sh "sudodocker tag ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ${DOCKER_IMAGE_NAME}:latest"
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
+                    sh "docker tag ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ${DOCKER_IMAGE_NAME}:latest"
                 }
             }
         }
@@ -58,11 +58,11 @@ pipeline {
                     env.DOCKER_TAG = "v${env.GIT_COMMIT}"
                     
                     // Push both tagged and latest images
-                    sh "sudo docker push ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
-                    sh "sudo docker push ${DOCKER_IMAGE_NAME}:latest"
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
+                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                     
                     // Logout for security
-                    sh 'sudo docker logout'
+                    sh 'docker logout'
                 }
             }
         }
