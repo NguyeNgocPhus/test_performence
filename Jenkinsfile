@@ -35,7 +35,7 @@ pipeline {
                 echo 'Building the application...'
                 script {
                     // Get the commit hash for tagging
-                    env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
+                    env.GIT_COMMIT = sh(script: 'git rev-parse --short=7 HEAD', returnStdout: true).trim()
                     echo "Short commit hash = ${env.GIT_COMMIT}"
                     // Build Docker image
                     sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.GIT_COMMIT} ."
