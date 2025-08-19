@@ -1,6 +1,7 @@
 pipeline {
     agent any
     environment {
+        PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         SERVICE_NAME = 'test'
         ENV_NAME = 'production'
         DOCKER_IMAGE_NAME = 'nguyenphu/testperformance'
@@ -22,7 +23,13 @@ pipeline {
         //         }
         //     }
         // }
-        
+        stage('Check Docker') {
+            steps {
+                sh '''
+                docker version
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 echo 'Building the application...'
