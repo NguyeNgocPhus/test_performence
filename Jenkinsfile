@@ -40,7 +40,6 @@ pipeline {
                     
                     // Build Docker image
                     sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
-                    sh "docker tag ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ${DOCKER_IMAGE_NAME}:latest"
                 }
             }
         }
@@ -59,7 +58,6 @@ pipeline {
                     
                     // Push both tagged and latest images
                     sh "docker push ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
-                    sh "docker push ${DOCKER_IMAGE_NAME}:latest"
                     
                     // Logout for security
                     sh 'docker logout'
