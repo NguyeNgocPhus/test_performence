@@ -36,10 +36,9 @@ pipeline {
                 script {
                     // Get the commit hash for tagging
                     env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    env.DOCKER_TAG = "v${env.GIT_COMMIT}"
-                    
+                    echo "Short commit hash = ${env.GIT_COMMIT}"
                     // Build Docker image
-                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."
+                    sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.GIT_COMMIT} ."
                 }
             }
         }
@@ -54,11 +53,9 @@ pipeline {
                     
                     // Get the commit hash for tagging
                     env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
-                    env.DOCKER_TAG = "v${env.GIT_COMMIT}"
-                    
+                
                     // Push both tagged and latest images
-                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG}"
-                    
+                    sh "docker push ${DOCKER_IMAGE_NAME}:${env.GIT_COMMIT}"
                     // Logout for security
                     sh 'docker logout'
                 }
