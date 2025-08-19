@@ -49,7 +49,7 @@ pipeline {
                 echo 'Publishing Docker image to registry...'
                 script {
                     // Login to Docker registry
-                    sh 'sudo docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
+                    sh 'docker login -u $DOCKER_CREDENTIALS_USR -p $DOCKER_CREDENTIALS_PSW'
                     
                     // Get the commit hash for tagging
                     env.GIT_COMMIT = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
