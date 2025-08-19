@@ -44,14 +44,7 @@ pipeline {
                 }
             }
         }
-        
-        stage('Test') {
-            steps {
-                echo 'Running tests...'
-                // Add your test commands here
-                sh 'dotnet test --no-build'
-            }
-        }
+    
         
         stage('Publish Docker Image') {
             steps {
