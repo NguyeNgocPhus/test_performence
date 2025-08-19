@@ -36,7 +36,7 @@ pipeline {
                 script {
                     // Get the commit hash for tagging
                     env.GIT_COMMIT = sh(script: "git log -n 1 --pretty=format:'%H'", returnStdout: true).trim()
-                    env.DOCKER_TAG = "v${env.GIT_COMMIT.take(7)}"
+                    env.DOCKER_TAG = "${env.GIT_COMMIT.take(7)}"
                     echo "Short commit hash = ${env.DOCKER_TAG}"
                     // Build Docker image
                     sh "docker build -t ${DOCKER_IMAGE_NAME}:${env.DOCKER_TAG} ."

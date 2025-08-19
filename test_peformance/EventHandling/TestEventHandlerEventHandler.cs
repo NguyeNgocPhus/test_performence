@@ -5,7 +5,7 @@ using Serilog.Context;
 using test_peformance.Event;
 
 namespace test_peformance.EventHandling;
-
+// ádasd
 public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
 {
 
