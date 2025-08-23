@@ -13,7 +13,7 @@ using test_peformance;
 using test_peformance.Abstractions;
 using test_peformance.Event;
 using test_peformance.EventHandling;
-
+// Tesst
 var builder = WebApplication.CreateBuilder(args);
 // Configure Serilog with filtering and TraceId formatting
 Log.Logger = new LoggerConfiguration()
