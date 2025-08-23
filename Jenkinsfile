@@ -32,7 +32,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                echo 'Building the application...'
+                echo 'Building the application.....'
                 script {
                     // Get the commit hash for tagging
                     env.GIT_COMMIT = sh(script: "git log -n 1 --pretty=format:'%H'", returnStdout: true).trim()
