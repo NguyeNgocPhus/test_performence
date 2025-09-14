@@ -111,6 +111,7 @@ builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase2<,>
 builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
 builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
 builder.Services.AddScoped(typeof(IJwtTokenService), typeof(JwtTokenService));
+// builder.Services.AddHostedService<MyJobService>();
 builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
 
@@ -163,7 +164,7 @@ builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
-
+builder.Services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
 var app = builder.Build();
 var eventBus = app.Services.GetRequiredService<IEventBus>();
 eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();

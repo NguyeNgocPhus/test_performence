@@ -17,7 +17,7 @@ namespace test_peformance.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.3")
+                .HasAnnotation("ProductVersion", "9.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -41,8 +41,7 @@ namespace test_peformance.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime?>("LastActivityAt")
-                        .IsRequired()
+                    b.Property<DateTime>("LastActivityAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -134,8 +133,7 @@ namespace test_peformance.Migrations
                     b.Property<int>("ConversationId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CreatedAt")
-                        .IsRequired()
+                    b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("CreatedBy")
@@ -149,6 +147,28 @@ namespace test_peformance.Migrations
                     b.HasIndex("ConversationId");
 
                     b.ToTable("Messages");
+                });
+
+            modelBuilder.Entity("test_peformance.Entities.SystemConfig", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeChanged")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SystemConfig");
                 });
 
             modelBuilder.Entity("test_peformance.Entities.Employee", b =>

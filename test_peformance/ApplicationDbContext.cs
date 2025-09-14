@@ -24,7 +24,7 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Conversation> Conversations { get; set; } = null!;
     public DbSet<Message> Messages { get; set; } = null!;
-
+    public DbSet<SystemConfig> SystemConfig { get; set; } = null!;
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
