@@ -11,8 +11,11 @@ using Serilog.Context;
 using Serilog.Events;
 using test_peformance;
 using test_peformance.Abstractions;
+using test_peformance.Data;
 using test_peformance.Event;
 using test_peformance.EventHandling;
+using test_peformance.Middleware;
+
 // Tesst
 var builder = WebApplication.CreateBuilder(args);
 // Configure Serilog with filtering and TraceId formatting
@@ -42,6 +45,16 @@ Log.Logger = new LoggerConfiguration()
         "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] [TraceId : {RequestId}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
 LogContext.PushProperty("RequestId", "SYSTEM");
+
+var loadRedis = string.Equals(
+    Environment.GetEnvironmentVariable("LOAD_REDIS"),
+    "Y",
+    StringComparison.OrdinalIgnoreCase);
+var loadRabbit = string.Equals(
+    Environment.GetEnvironmentVariable("LOAD_RABBIT"),
+    "Y",
+    StringComparison.OrdinalIgnoreCase);
+
 builder.Host.UseSerilog();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -49,19 +62,28 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 string redisConnection = builder.Configuration.GetConnectionString("Redis");
 builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
-var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
+var connectionStringMaster = builder.Configuration.GetConnectionString("Master");
+var connectionStringReplica = builder.Configuration.GetConnectionString("Replica");
 
 // dotnet ef migrations add "Conversation" --project test_peformance --context ApplicationDbContext --startup-project test_peformance --output-dir Migrations
 // dotnet ef database update --project test_peformance --startup-project test_peformance --context ApplicationDbContext
 
 builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
 {
-    option.UseSqlServer(connectionString, sqlOptions =>
+    option.UseSqlServer(connectionStringMaster, _ =>
     {
-        // sqlOptions.AddBulkOperationSupport();
     }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
     option.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); }));
 });
+
+builder.Services.AddPooledDbContextFactory<ApplicationDbReplicaContext>(option =>
+{
+    option.UseSqlServer(connectionStringReplica, _ =>
+    {
+    }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+    option.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); }));
+});
+
 
 // // Thêm Redis vào DI container
 // string redisConnection  = builder.Configuration.GetConnectionString("Redis");
@@ -113,6 +135,8 @@ builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
 builder.Services.AddScoped(typeof(IJwtTokenService), typeof(JwtTokenService));
 // builder.Services.AddHostedService<MyJobService>();
 builder.Services.AddScoped<ApplicationDbContext>();
+builder.Services.AddScoped<ApplicationDbReplicaContext>();
+
 builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
 
 // builder.Services.AddHostedService<GrainBackgroundService>();
@@ -140,10 +164,10 @@ builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     {
         retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
     }
-
     logger.LogInformation($"EventBus connection string: {builder.Configuration["EventBusConnection"]}");
     return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
 });
+
 builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
 {
     var subscriptionClientName = builder.Configuration["SubscriptionClientName"];
@@ -165,6 +189,19 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
 builder.Services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+builder.Services.AddSingleton<IRywTokenService>(_ =>
+    new RywTokenService("m4Vqk3XWcYl8Kc6oR9H1xS0P2zAq7JdEwTfGhIjKlMn="));
+builder.Services.AddScoped<IAppDbContext, AppDbContextAccessor>();
+builder.Services.AddScoped<RywDecision>();
+
+builder.Services.AddScoped(p =>
+    new AddRywTokenAfterWriteFilter(
+        p.GetRequiredService<IRywTokenService>(),
+        5));
+
+// IMiddleware PHẢI là Transient (hoặc Scoped), TUYỆT ĐỐI không Singleton
+builder.Services.AddTransient<RywRoutingMiddleware>();
+
 var app = builder.Build();
 var eventBus = app.Services.GetRequiredService<IEventBus>();
 eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();

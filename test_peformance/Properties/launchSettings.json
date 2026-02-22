@@ -4,9 +4,11 @@
       "commandName": "Project",
       "environmentVariables": {
         "SILO_INDEX": "4",
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "LOAD_RABBIT": "N",
+        "LOAD_REDIS": "N"
       },
-      "applicationUrl": "http://localhost:5001"
+      "applicationUrl": "http://localhost:5000"
     }
   }
 }

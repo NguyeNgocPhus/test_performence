@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using test_peformance.Data;
 using test_peformance.Entities;
 
 namespace test_peformance.Controllers;
@@ -9,10 +10,11 @@ namespace test_peformance.Controllers;
 public class ConversationController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
-
-    public ConversationController(ApplicationDbContext context)
+    private readonly IAppDbContext _appDbContext;
+    public ConversationController(ApplicationDbContext context, IAppDbContext appDbContext)
     {
         _context = context;
+        _appDbContext = appDbContext;
     }
 
     [HttpGet]
@@ -42,8 +44,8 @@ public class ConversationController : ControllerBase
     public async Task<ActionResult<Conversation>> CreateConversation(Conversation conversation)
     {
         conversation.LastActivityAt = DateTime.UtcNow;
-        _context.Conversations.Add(conversation);
-        await _context.SaveChangesAsync();
+        _appDbContext.Conversations.Add(conversation);
+        await _appDbContext.SaveChangesAsync();
 
         return CreatedAtAction(nameof(GetConversation), new { id = conversation.Id }, conversation);
     }
