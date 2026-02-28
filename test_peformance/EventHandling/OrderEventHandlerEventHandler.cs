@@ -6,7 +6,7 @@ using test_peformance.Event;
 
 namespace test_peformance.EventHandling;
 // ádasd
-public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
+public class OrderEventHandlerEventHandler : IIntegrationEventHandler<OrderEvent>
 {
 
     /// <summary>
@@ -17,7 +17,7 @@ public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
     /// <param name="event">       
     /// </param>
     /// <returns></returns>
-    public async Task Handle(TestEvent @event)
+    public async Task Handle(OrderEvent @event)
     {
         LogContext.PushProperty("RequestId",  @event.TraceId);
 

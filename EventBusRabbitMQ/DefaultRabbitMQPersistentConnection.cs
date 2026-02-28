@@ -88,7 +88,7 @@ public class DefaultRabbitMqPersistentConnection
         }
     }
 
-    private void OnConnectionBlocked(object sender, ConnectionBlockedEventArgs e)
+    private void OnConnectionBlocked(object sender, ConnectionBlockedEventArgs e)       
     {
         if (Disposed) return;
 

@@ -5,8 +5,6 @@ namespace EventBus;
 
 public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptionsManager
 {
-
-
     private readonly Dictionary<string, List<SubscriptionInfo>> _handlers;
     private readonly List<Type> _eventTypes;
 

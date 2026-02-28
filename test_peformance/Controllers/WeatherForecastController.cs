@@ -54,6 +54,31 @@ public class WeatherForecastController : ControllerBase
         
         return Ok();
     }
+    [HttpGet]
+    [Route("test_order")]
+    public async Task<IActionResult> GetOrder()
+    {
+        try
+        {
+            var traceId = HttpContext.TraceIdentifier;
+            Log.Information("Publishing integration event: {IntegrationEventId} from {AppName}", Guid.NewGuid(), _env.ApplicationName);
+
+            _eventBus.Publish(new OrderEvent()
+            {
+                Name = "Phus",
+                Price = 1m,
+                TraceId = traceId   
+            });
+            Log.Information("Publishing integration event success");
+
+        }
+        catch (Exception ex)
+        {
+            Log.Error(ex, "ERROR publishing integration event: {IntegrationEventId} from {AppName}");
+        }
+        
+        return Ok();
+    }
 
     [HttpPost]
     [Route("file")]

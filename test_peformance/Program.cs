@@ -5,6 +5,11 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.IdentityModel.Tokens;
+using OpenTelemetry.Exporter;
+using OpenTelemetry.Logs;
+using OpenTelemetry.Metrics;
+using OpenTelemetry.Resources;
+using OpenTelemetry.Trace;
 using RabbitMQ.Client;
 using Serilog;
 using Serilog.Context;
@@ -164,11 +169,29 @@ builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
+builder.Services.AddScoped<OrderEventHandlerEventHandler>();
+
 builder.Services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+
+var otlpEndpoint = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] 
+                   ?? "http://localhost:4317";
+
+builder.Services.AddOpenTelemetry()
+    .WithTracing(tracing => tracing
+        // The rest of your setup code goes here
+        .AddAspNetCoreInstrumentation()
+        .AddOtlpExporter())
+    .WithMetrics(metrics => metrics
+        // The rest of your setup code goes here
+        .AddAspNetCoreInstrumentation()
+        .AddRuntimeInstrumentation()
+        
+        .AddOtlpExporter());;
+
 var app = builder.Build();
 var eventBus = app.Services.GetRequiredService<IEventBus>();
 eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
-
+eventBus.Subscribe<OrderEvent, OrderEventHandlerEventHandler>();
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(

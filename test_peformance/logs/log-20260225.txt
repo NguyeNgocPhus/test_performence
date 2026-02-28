@@ -1,0 +1,480 @@
+[2026-02-25 20:07:22 INF] [TraceId : SYSTEM] EventBus connection string: localhost
+[2026-02-25 20:07:22 INF] [TraceId : SYSTEM] RabbitMQ Client is trying to connect
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] EventBus connection string: localhost
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] RabbitMQ Client is trying to connect
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] RabbitMQ Client acquired a persistent connection to 'localhost' and is subscribed to failure events
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] Creating RabbitMQ consumer channel
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] Subscribing to event TestEvent with TestEventHandlerEventHandler
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] Starting RabbitMQ basic consume
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] Subscribing to event OrderEvent with OrderEventHandlerEventHandler
+[2026-02-25 20:07:47 INF] [TraceId : SYSTEM] Starting RabbitMQ basic consume
+[2026-02-25 20:07:48 INF] [TraceId : SYSTEM] Starting web host
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] EventBus connection string: localhost
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] RabbitMQ Client is trying to connect
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] RabbitMQ Client acquired a persistent connection to 'localhost' and is subscribed to failure events
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Creating RabbitMQ consumer channel
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Subscribing to event TestEvent with TestEventHandlerEventHandler
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Starting RabbitMQ basic consume
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Subscribing to event OrderEvent with OrderEventHandlerEventHandler
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Starting RabbitMQ basic consume
+[2026-02-25 20:07:53 INF] [TraceId : SYSTEM] Starting web host
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] HTTP GET /test_order started
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Publishing integration event: "135a2532-e7f3-4ecf-8e69-5260373c8ae9" from test_peformance
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Creating RabbitMQ channel to publish event: "2a46183e-c078-4668-a6ac-e2f0204001ed" (OrderEvent)
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Declaring RabbitMQ exchange to publish event: "2a46183e-c078-4668-a6ac-e2f0204001ed"
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Publishing event to RabbitMQ: "2a46183e-c078-4668-a6ac-e2f0204001ed"
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Publishing integration event success
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] HTTP GET /test_order responded 200 in 239ms
+[2026-02-25 20:12:20 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:12:20 INF] [TraceId : 0HNJKDU10BMLL:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"2a46183e-c078-4668-a6ac-e2f0204001ed","CreationDate":"2026-02-25T13:12:20.762711Z","TraceId":"0HNJKDU10BMLL:00000001"}
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] HTTP GET /test_order started
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Publishing integration event: "d81ce9d7-adda-4132-979e-cdc757e4ccc5" from test_peformance
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Creating RabbitMQ channel to publish event: "87a86cd0-6a4b-4ad5-bc9c-e20407ad0a6d" (OrderEvent)
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Declaring RabbitMQ exchange to publish event: "87a86cd0-6a4b-4ad5-bc9c-e20407ad0a6d"
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Publishing event to RabbitMQ: "87a86cd0-6a4b-4ad5-bc9c-e20407ad0a6d"
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Publishing integration event success
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] HTTP GET /test_order responded 200 in 32ms
+[2026-02-25 20:12:21 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:12:21 INF] [TraceId : 0HNJKDU10BMLL:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"87a86cd0-6a4b-4ad5-bc9c-e20407ad0a6d","CreationDate":"2026-02-25T13:12:21.662632Z","TraceId":"0HNJKDU10BMLL:00000002"}
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] HTTP GET /test started
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Publishing integration event: "1dc8ab82-655c-4141-aaf0-ca079abf2eed" from test_peformance
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Creating RabbitMQ channel to publish event: "20485884-2035-4d09-a5b8-14c7d103bba3" (TestEvent)
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Declaring RabbitMQ exchange to publish event: "20485884-2035-4d09-a5b8-14c7d103bba3"
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Publishing event to RabbitMQ: "20485884-2035-4d09-a5b8-14c7d103bba3"
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Publishing integration event success
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] HTTP GET /test responded 200 in 21ms
+[2026-02-25 20:12:27 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000003] Integration Event {"Name":"Phus","Id":"20485884-2035-4d09-a5b8-14c7d103bba3","CreationDate":"2026-02-25T13:12:27.164107Z","TraceId":"0HNJKDU10BMLL:00000003"}
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] HTTP GET /test started
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Publishing integration event: "5a245655-78dc-4169-8e70-39c25a1ff2fb" from test_peformance
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Creating RabbitMQ channel to publish event: "83f09674-6eb5-45bb-b4c2-4cc6fe0bb648" (TestEvent)
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Declaring RabbitMQ exchange to publish event: "83f09674-6eb5-45bb-b4c2-4cc6fe0bb648"
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Publishing event to RabbitMQ: "83f09674-6eb5-45bb-b4c2-4cc6fe0bb648"
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Publishing integration event success
+[2026-02-25 20:12:27 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] HTTP GET /test responded 200 in 13ms
+[2026-02-25 20:12:27 INF] [TraceId : 0HNJKDU10BMLL:00000004] Integration Event {"Name":"Phus","Id":"83f09674-6eb5-45bb-b4c2-4cc6fe0bb648","CreationDate":"2026-02-25T13:12:27.905861Z","TraceId":"0HNJKDU10BMLL:00000004"}
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] HTTP GET /test started
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Publishing integration event: "ed2d94d4-09b7-4343-8ed3-ffa464c6d20b" from test_peformance
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Creating RabbitMQ channel to publish event: "a130a97e-7c30-497f-9cd6-3f644f3e4bd7" (TestEvent)
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Declaring RabbitMQ exchange to publish event: "a130a97e-7c30-497f-9cd6-3f644f3e4bd7"
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Publishing event to RabbitMQ: "a130a97e-7c30-497f-9cd6-3f644f3e4bd7"
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Publishing integration event success
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] HTTP GET /test responded 200 in 19ms
+[2026-02-25 20:12:28 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:12:28 INF] [TraceId : 0HNJKDU10BMLL:00000005] Integration Event {"Name":"Phus","Id":"a130a97e-7c30-497f-9cd6-3f644f3e4bd7","CreationDate":"2026-02-25T13:12:28.641448Z","TraceId":"0HNJKDU10BMLL:00000005"}
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] HTTP GET /test started
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Publishing integration event: "a4df1295-4b5a-4de3-aadc-ac7d1ec0453e" from test_peformance
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Creating RabbitMQ channel to publish event: "2b83a3d2-5a3a-498e-8c5c-1356e8a91672" (TestEvent)
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Declaring RabbitMQ exchange to publish event: "2b83a3d2-5a3a-498e-8c5c-1356e8a91672"
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Publishing event to RabbitMQ: "2b83a3d2-5a3a-498e-8c5c-1356e8a91672"
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Publishing integration event success
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] HTTP GET /test responded 200 in 9ms
+[2026-02-25 20:12:30 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000006] Integration Event {"Name":"Phus","Id":"2b83a3d2-5a3a-498e-8c5c-1356e8a91672","CreationDate":"2026-02-25T13:12:30.006109Z","TraceId":"0HNJKDU10BMLL:00000006"}
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] HTTP GET /test started
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Publishing integration event: "1cb65585-1766-4da2-b924-d5ef3df458c6" from test_peformance
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Creating RabbitMQ channel to publish event: "2fa2ab62-90dd-493a-9d77-81d039a22130" (TestEvent)
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Declaring RabbitMQ exchange to publish event: "2fa2ab62-90dd-493a-9d77-81d039a22130"
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Publishing event to RabbitMQ: "2fa2ab62-90dd-493a-9d77-81d039a22130"
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Publishing integration event success
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] HTTP GET /test responded 200 in 19ms
+[2026-02-25 20:12:30 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:12:30 INF] [TraceId : 0HNJKDU10BMLL:00000007] Integration Event {"Name":"Phus","Id":"2fa2ab62-90dd-493a-9d77-81d039a22130","CreationDate":"2026-02-25T13:12:30.583498Z","TraceId":"0HNJKDU10BMLL:00000007"}
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] HTTP GET /test_order started
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Publishing integration event: "07e606a6-94ad-4957-9843-8a9c517aad80" from test_peformance
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Creating RabbitMQ channel to publish event: "8eed6767-063a-480f-8449-46075e7e2663" (OrderEvent)
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Declaring RabbitMQ exchange to publish event: "8eed6767-063a-480f-8449-46075e7e2663"
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Publishing event to RabbitMQ: "8eed6767-063a-480f-8449-46075e7e2663"
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Publishing integration event success
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] HTTP GET /test_order responded 200 in 5ms
+[2026-02-25 20:12:34 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:12:34 INF] [TraceId : 0HNJKDU10BMLL:00000008] Integration Event {"Name":"Phus","Price":1,"Id":"8eed6767-063a-480f-8449-46075e7e2663","CreationDate":"2026-02-25T13:12:34.889274Z","TraceId":"0HNJKDU10BMLL:00000008"}
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] HTTP GET /test_order started
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Publishing integration event: "4c8f7e3d-f8f1-4ce4-a0ab-712aad82d9dd" from test_peformance
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Creating RabbitMQ channel to publish event: "5b4f65a7-1023-4e8c-aabe-17e4f7ec3af7" (OrderEvent)
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Declaring RabbitMQ exchange to publish event: "5b4f65a7-1023-4e8c-aabe-17e4f7ec3af7"
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Publishing event to RabbitMQ: "5b4f65a7-1023-4e8c-aabe-17e4f7ec3af7"
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Publishing integration event success
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] HTTP GET /test_order responded 200 in 3ms
+[2026-02-25 20:12:35 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:12:35 INF] [TraceId : 0HNJKDU10BMLL:00000009] Integration Event {"Name":"Phus","Price":1,"Id":"5b4f65a7-1023-4e8c-aabe-17e4f7ec3af7","CreationDate":"2026-02-25T13:12:35.611934Z","TraceId":"0HNJKDU10BMLL:00000009"}
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] HTTP GET /test_order started
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Publishing integration event: "d0663a80-1d96-40e9-91bd-368ec9354de9" from test_peformance
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Creating RabbitMQ channel to publish event: "5cb4b6fb-dc10-4eb6-9e42-d30c85d5adcb" (OrderEvent)
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Declaring RabbitMQ exchange to publish event: "5cb4b6fb-dc10-4eb6-9e42-d30c85d5adcb"
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Publishing event to RabbitMQ: "5cb4b6fb-dc10-4eb6-9e42-d30c85d5adcb"
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Publishing integration event success
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] HTTP GET /test_order responded 200 in 15ms
+[2026-02-25 20:12:36 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:12:36 INF] [TraceId : 0HNJKDU10BMLL:0000000A] Integration Event {"Name":"Phus","Price":1,"Id":"5cb4b6fb-dc10-4eb6-9e42-d30c85d5adcb","CreationDate":"2026-02-25T13:12:36.169914Z","TraceId":"0HNJKDU10BMLL:0000000A"}
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] HTTP GET /test_order started
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Publishing integration event: "85de93eb-e072-4f68-b43d-c6376b38f217" from test_peformance
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Creating RabbitMQ channel to publish event: "1f697c11-b1cf-484d-a64b-50822606b32c" (OrderEvent)
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Declaring RabbitMQ exchange to publish event: "1f697c11-b1cf-484d-a64b-50822606b32c"
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Publishing event to RabbitMQ: "1f697c11-b1cf-484d-a64b-50822606b32c"
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Publishing integration event success
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] HTTP GET /test_order responded 200 in 31ms
+[2026-02-25 20:13:28 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:13:28 INF] [TraceId : 0HNJKDU10BMLL:0000000B] Integration Event {"Name":"Phus","Price":1,"Id":"1f697c11-b1cf-484d-a64b-50822606b32c","CreationDate":"2026-02-25T13:13:28.137595Z","TraceId":"0HNJKDU10BMLL:0000000B"}
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] HTTP GET /test_order started
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Publishing integration event: "c1e2d9bc-24bf-4b7a-812c-c59bfb4a8222" from test_peformance
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Creating RabbitMQ channel to publish event: "284d6507-35a6-4c7c-b75d-512ab641eef3" (OrderEvent)
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Declaring RabbitMQ exchange to publish event: "284d6507-35a6-4c7c-b75d-512ab641eef3"
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Publishing event to RabbitMQ: "284d6507-35a6-4c7c-b75d-512ab641eef3"
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Publishing integration event success
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] HTTP GET /test_order responded 200 in 20ms
+[2026-02-25 20:13:29 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:13:29 INF] [TraceId : 0HNJKDU10BMLL:0000000C] Integration Event {"Name":"Phus","Price":1,"Id":"284d6507-35a6-4c7c-b75d-512ab641eef3","CreationDate":"2026-02-25T13:13:29.017632Z","TraceId":"0HNJKDU10BMLL:0000000C"}
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] HTTP GET /test_order started
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Publishing integration event: "9af1b064-15bf-4bcd-93bd-e95bd36528f3" from test_peformance
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Creating RabbitMQ channel to publish event: "1f5ee3be-252f-4fb9-a8cd-588e2808a59b" (OrderEvent)
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Declaring RabbitMQ exchange to publish event: "1f5ee3be-252f-4fb9-a8cd-588e2808a59b"
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Publishing event to RabbitMQ: "1f5ee3be-252f-4fb9-a8cd-588e2808a59b"
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Publishing integration event success
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] HTTP GET /test_order responded 200 in 22ms
+[2026-02-25 20:16:31 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"1f5ee3be-252f-4fb9-a8cd-588e2808a59b","CreationDate":"2026-02-25T13:16:31.047872Z","TraceId":"0HNJKDU10BMLM:00000001"}
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] HTTP GET /test_order started
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Publishing integration event: "093c68c7-6967-4726-90c4-1504259c8eba" from test_peformance
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Creating RabbitMQ channel to publish event: "53ea542e-f6a1-4b57-9b89-8ab74ffb9247" (OrderEvent)
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Declaring RabbitMQ exchange to publish event: "53ea542e-f6a1-4b57-9b89-8ab74ffb9247"
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Publishing event to RabbitMQ: "53ea542e-f6a1-4b57-9b89-8ab74ffb9247"
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Publishing integration event success
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] HTTP GET /test_order responded 200 in 31ms
+[2026-02-25 20:16:31 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:16:31 INF] [TraceId : 0HNJKDU10BMLM:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"53ea542e-f6a1-4b57-9b89-8ab74ffb9247","CreationDate":"2026-02-25T13:16:31.696864Z","TraceId":"0HNJKDU10BMLM:00000002"}
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] HTTP GET /test_order started
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Publishing integration event: "cdc62982-566d-407e-98a1-1c33babbdb7c" from test_peformance
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Creating RabbitMQ channel to publish event: "d38663f9-731d-4f01-9b0d-874686f3892c" (OrderEvent)
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Declaring RabbitMQ exchange to publish event: "d38663f9-731d-4f01-9b0d-874686f3892c"
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Publishing event to RabbitMQ: "d38663f9-731d-4f01-9b0d-874686f3892c"
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Publishing integration event success
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] HTTP GET /test_order responded 200 in 14ms
+[2026-02-25 20:16:32 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000003] Integration Event {"Name":"Phus","Price":1,"Id":"d38663f9-731d-4f01-9b0d-874686f3892c","CreationDate":"2026-02-25T13:16:32.139077Z","TraceId":"0HNJKDU10BMLM:00000003"}
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] HTTP GET /test_order started
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Publishing integration event: "d6203109-df5b-4b10-ae32-0bd0f63c8e30" from test_peformance
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Creating RabbitMQ channel to publish event: "bd5a539e-bbb5-4de3-a9f5-3f9e58e2bddf" (OrderEvent)
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Declaring RabbitMQ exchange to publish event: "bd5a539e-bbb5-4de3-a9f5-3f9e58e2bddf"
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Publishing event to RabbitMQ: "bd5a539e-bbb5-4de3-a9f5-3f9e58e2bddf"
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Publishing integration event success
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] HTTP GET /test_order responded 200 in 12ms
+[2026-02-25 20:16:32 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:16:32 INF] [TraceId : 0HNJKDU10BMLM:00000004] Integration Event {"Name":"Phus","Price":1,"Id":"bd5a539e-bbb5-4de3-a9f5-3f9e58e2bddf","CreationDate":"2026-02-25T13:16:32.538928Z","TraceId":"0HNJKDU10BMLM:00000004"}
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] HTTP GET /test_order started
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Publishing integration event: "ec806846-28d9-4aca-b09f-d95a3e0e5408" from test_peformance
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Creating RabbitMQ channel to publish event: "04561a67-5926-4fb0-a39a-a90f28d9d2cd" (OrderEvent)
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Declaring RabbitMQ exchange to publish event: "04561a67-5926-4fb0-a39a-a90f28d9d2cd"
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Publishing event to RabbitMQ: "04561a67-5926-4fb0-a39a-a90f28d9d2cd"
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Publishing integration event success
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] HTTP GET /test_order responded 200 in 41ms
+[2026-02-25 20:18:43 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"04561a67-5926-4fb0-a39a-a90f28d9d2cd","CreationDate":"2026-02-25T13:18:43.192114Z","TraceId":"0HNJKDU10BMLN:00000001"}
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] HTTP GET /test_order started
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Publishing integration event: "46e27f6d-0949-4902-82e0-a7b27efa12ce" from test_peformance
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Creating RabbitMQ channel to publish event: "f04c7063-0cf3-4324-85a6-f1dae86980ed" (OrderEvent)
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Declaring RabbitMQ exchange to publish event: "f04c7063-0cf3-4324-85a6-f1dae86980ed"
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Publishing event to RabbitMQ: "f04c7063-0cf3-4324-85a6-f1dae86980ed"
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Publishing integration event success
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] HTTP GET /test_order responded 200 in 14ms
+[2026-02-25 20:18:43 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:43 INF] [TraceId : 0HNJKDU10BMLN:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"f04c7063-0cf3-4324-85a6-f1dae86980ed","CreationDate":"2026-02-25T13:18:43.893158Z","TraceId":"0HNJKDU10BMLN:00000002"}
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] HTTP GET /test_order started
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Publishing integration event: "3e47c046-ca25-4f74-8897-e87c92693190" from test_peformance
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Creating RabbitMQ channel to publish event: "56848f35-3519-4953-a5f2-7779778ad921" (OrderEvent)
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Declaring RabbitMQ exchange to publish event: "56848f35-3519-4953-a5f2-7779778ad921"
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Publishing event to RabbitMQ: "56848f35-3519-4953-a5f2-7779778ad921"
+[2026-02-25 20:18:44 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Publishing integration event success
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] Integration Event {"Name":"Phus","Price":1,"Id":"56848f35-3519-4953-a5f2-7779778ad921","CreationDate":"2026-02-25T13:18:44.413585Z","TraceId":"0HNJKDU10BMLN:00000003"}
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000003] HTTP GET /test_order responded 200 in 19ms
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] HTTP GET /test_order started
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Publishing integration event: "5857c94b-15ac-4062-8491-7c1fb00409a4" from test_peformance
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Creating RabbitMQ channel to publish event: "50450932-4648-4162-b48d-dd43e10aff28" (OrderEvent)
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Declaring RabbitMQ exchange to publish event: "50450932-4648-4162-b48d-dd43e10aff28"
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Publishing event to RabbitMQ: "50450932-4648-4162-b48d-dd43e10aff28"
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Publishing integration event success
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] HTTP GET /test_order responded 200 in 20ms
+[2026-02-25 20:18:44 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:44 INF] [TraceId : 0HNJKDU10BMLN:00000004] Integration Event {"Name":"Phus","Price":1,"Id":"50450932-4648-4162-b48d-dd43e10aff28","CreationDate":"2026-02-25T13:18:44.739291Z","TraceId":"0HNJKDU10BMLN:00000004"}
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] HTTP GET /test_order started
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Publishing integration event: "871ff632-c9b0-421d-91de-fd9b73896558" from test_peformance
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Creating RabbitMQ channel to publish event: "f90617db-af71-4dd7-b631-48967fa25d37" (OrderEvent)
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Declaring RabbitMQ exchange to publish event: "f90617db-af71-4dd7-b631-48967fa25d37"
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Publishing event to RabbitMQ: "f90617db-af71-4dd7-b631-48967fa25d37"
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Publishing integration event success
+[2026-02-25 20:18:45 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] HTTP GET /test_order responded 200 in 13ms
+[2026-02-25 20:18:45 INF] [TraceId : 0HNJKDU10BMLN:00000005] Integration Event {"Name":"Phus","Price":1,"Id":"f90617db-af71-4dd7-b631-48967fa25d37","CreationDate":"2026-02-25T13:18:45.04626Z","TraceId":"0HNJKDU10BMLN:00000005"}
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] HTTP GET /test_order started
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Publishing integration event: "13a10dfc-308c-4842-9aa6-f876063b8d42" from test_peformance
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Creating RabbitMQ channel to publish event: "6bec66e6-47a2-4020-8c86-7bc4f3a4931e" (OrderEvent)
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Declaring RabbitMQ exchange to publish event: "6bec66e6-47a2-4020-8c86-7bc4f3a4931e"
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Publishing event to RabbitMQ: "6bec66e6-47a2-4020-8c86-7bc4f3a4931e"
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Publishing integration event success
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] HTTP GET /test_order responded 200 in 8ms
+[2026-02-25 20:18:46 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:46 INF] [TraceId : 0HNJKDU10BMLN:00000006] Integration Event {"Name":"Phus","Price":1,"Id":"6bec66e6-47a2-4020-8c86-7bc4f3a4931e","CreationDate":"2026-02-25T13:18:46.927728Z","TraceId":"0HNJKDU10BMLN:00000006"}
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] HTTP GET /test_order started
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Publishing integration event: "8062a908-587d-4706-b5a1-d3a45adeb6db" from test_peformance
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Creating RabbitMQ channel to publish event: "f57b296e-64d9-40a7-8819-2b0389ae6015" (OrderEvent)
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Declaring RabbitMQ exchange to publish event: "f57b296e-64d9-40a7-8819-2b0389ae6015"
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Publishing event to RabbitMQ: "f57b296e-64d9-40a7-8819-2b0389ae6015"
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Publishing integration event success
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] HTTP GET /test_order responded 200 in 11ms
+[2026-02-25 20:18:47 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:47 INF] [TraceId : 0HNJKDU10BMLN:00000007] Integration Event {"Name":"Phus","Price":1,"Id":"f57b296e-64d9-40a7-8819-2b0389ae6015","CreationDate":"2026-02-25T13:18:47.346491Z","TraceId":"0HNJKDU10BMLN:00000007"}
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] HTTP GET /test_order started
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Publishing integration event: "0b80cf35-1a16-4391-95a3-12a72fc069bc" from test_peformance
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Creating RabbitMQ channel to publish event: "2c0aba10-0a75-478b-8487-1bde9dcd4725" (OrderEvent)
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Declaring RabbitMQ exchange to publish event: "2c0aba10-0a75-478b-8487-1bde9dcd4725"
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Publishing event to RabbitMQ: "2c0aba10-0a75-478b-8487-1bde9dcd4725"
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Publishing integration event success
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] HTTP GET /test_order responded 200 in 11ms
+[2026-02-25 20:18:48 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:48 INF] [TraceId : 0HNJKDU10BMLN:00000008] Integration Event {"Name":"Phus","Price":1,"Id":"2c0aba10-0a75-478b-8487-1bde9dcd4725","CreationDate":"2026-02-25T13:18:48.590976Z","TraceId":"0HNJKDU10BMLN:00000008"}
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] HTTP GET /test_order started
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Publishing integration event: "01115fdb-15be-469e-b1eb-8c4ebb1e8c84" from test_peformance
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Creating RabbitMQ channel to publish event: "0235d000-e648-41e3-b95b-10a44f4c9a47" (OrderEvent)
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Declaring RabbitMQ exchange to publish event: "0235d000-e648-41e3-b95b-10a44f4c9a47"
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Publishing event to RabbitMQ: "0235d000-e648-41e3-b95b-10a44f4c9a47"
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Publishing integration event success
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] HTTP GET /test_order responded 200 in 11ms
+[2026-02-25 20:18:49 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:00000009] Integration Event {"Name":"Phus","Price":1,"Id":"0235d000-e648-41e3-b95b-10a44f4c9a47","CreationDate":"2026-02-25T13:18:49.185246Z","TraceId":"0HNJKDU10BMLN:00000009"}
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] HTTP GET /test_order started
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Publishing integration event: "56cb9a17-3073-4691-9e5e-51ddfb51ba02" from test_peformance
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Creating RabbitMQ channel to publish event: "5239e331-871b-453f-85aa-a5fee1c63039" (OrderEvent)
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Declaring RabbitMQ exchange to publish event: "5239e331-871b-453f-85aa-a5fee1c63039"
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Publishing event to RabbitMQ: "5239e331-871b-453f-85aa-a5fee1c63039"
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Publishing integration event success
+[2026-02-25 20:18:49 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] Integration Event {"Name":"Phus","Price":1,"Id":"5239e331-871b-453f-85aa-a5fee1c63039","CreationDate":"2026-02-25T13:18:49.612628Z","TraceId":"0HNJKDU10BMLN:0000000A"}
+[2026-02-25 20:18:49 INF] [TraceId : 0HNJKDU10BMLN:0000000A] HTTP GET /test_order responded 200 in 9ms
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] HTTP GET /test_order started
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Publishing integration event: "30086d7d-6213-4020-a4d8-2edc80628514" from test_peformance
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Creating RabbitMQ channel to publish event: "9cc0d2b3-c7f7-4779-b042-1828c410e5bc" (OrderEvent)
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Declaring RabbitMQ exchange to publish event: "9cc0d2b3-c7f7-4779-b042-1828c410e5bc"
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Publishing event to RabbitMQ: "9cc0d2b3-c7f7-4779-b042-1828c410e5bc"
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Publishing integration event success
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] HTTP GET /test_order responded 200 in 33ms
+[2026-02-25 20:20:25 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"9cc0d2b3-c7f7-4779-b042-1828c410e5bc","CreationDate":"2026-02-25T13:20:25.4191Z","TraceId":"0HNJKDU10BMLO:00000001"}
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] HTTP GET /test_order started
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Publishing integration event: "5b8998e0-9c32-4331-8afc-46e09a142aab" from test_peformance
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Creating RabbitMQ channel to publish event: "3e4f15c9-3e05-4902-92dc-c34894731d99" (OrderEvent)
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Declaring RabbitMQ exchange to publish event: "3e4f15c9-3e05-4902-92dc-c34894731d99"
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Publishing event to RabbitMQ: "3e4f15c9-3e05-4902-92dc-c34894731d99"
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Publishing integration event success
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] HTTP GET /test_order responded 200 in 3ms
+[2026-02-25 20:20:25 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:20:25 INF] [TraceId : 0HNJKDU10BMLO:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"3e4f15c9-3e05-4902-92dc-c34894731d99","CreationDate":"2026-02-25T13:20:25.915739Z","TraceId":"0HNJKDU10BMLO:00000002"}
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] HTTP GET /test_order started
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Publishing integration event: "f1cd9c4b-16e9-4f96-8955-f808b4540907" from test_peformance
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Creating RabbitMQ channel to publish event: "011545f1-2315-42f7-b1ea-462137ac3b6a" (OrderEvent)
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Declaring RabbitMQ exchange to publish event: "011545f1-2315-42f7-b1ea-462137ac3b6a"
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Publishing event to RabbitMQ: "011545f1-2315-42f7-b1ea-462137ac3b6a"
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Publishing integration event success
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] HTTP GET /test_order responded 200 in 10ms
+[2026-02-25 20:20:37 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:20:37 INF] [TraceId : 0HNJKDU10BMLO:00000003] Integration Event {"Name":"Phus","Price":1,"Id":"011545f1-2315-42f7-b1ea-462137ac3b6a","CreationDate":"2026-02-25T13:20:37.339111Z","TraceId":"0HNJKDU10BMLO:00000003"}
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] HTTP GET /test_order started
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Publishing integration event: "cfafc838-b6d4-4467-9e5b-c729c376348a" from test_peformance
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Creating RabbitMQ channel to publish event: "5b36c57e-200c-4b2d-9d65-712ebe57b39d" (OrderEvent)
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Declaring RabbitMQ exchange to publish event: "5b36c57e-200c-4b2d-9d65-712ebe57b39d"
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Publishing event to RabbitMQ: "5b36c57e-200c-4b2d-9d65-712ebe57b39d"
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Publishing integration event success
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] HTTP GET /test_order responded 200 in 18ms
+[2026-02-25 20:20:49 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:20:49 INF] [TraceId : 0HNJKDU10BMLO:00000004] Integration Event {"Name":"Phus","Price":1,"Id":"5b36c57e-200c-4b2d-9d65-712ebe57b39d","CreationDate":"2026-02-25T13:20:49.809745Z","TraceId":"0HNJKDU10BMLO:00000004"}
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] HTTP GET /test started
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Publishing integration event: "9bf1819a-5da2-4327-aa73-86992735f9ea" from test_peformance
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Creating RabbitMQ channel to publish event: "1a5b4d28-6068-4d87-84da-57633558943d" (TestEvent)
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Declaring RabbitMQ exchange to publish event: "1a5b4d28-6068-4d87-84da-57633558943d"
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Publishing event to RabbitMQ: "1a5b4d28-6068-4d87-84da-57633558943d"
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Publishing integration event success
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] HTTP GET /test responded 200 in 16ms
+[2026-02-25 20:21:25 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:21:25 INF] [TraceId : 0HNJKDU10BMLP:00000001] Integration Event {"Name":"Phus","Id":"1a5b4d28-6068-4d87-84da-57633558943d","CreationDate":"2026-02-25T13:21:25.138061Z","TraceId":"0HNJKDU10BMLP:00000001"}
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] HTTP GET /test started
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Publishing integration event: "8bef4880-e8a9-4c6c-9cf9-a775802d31f6" from test_peformance
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Creating RabbitMQ channel to publish event: "6c72565c-55bd-4c1f-bfe8-57a9d6cd960a" (TestEvent)
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Declaring RabbitMQ exchange to publish event: "6c72565c-55bd-4c1f-bfe8-57a9d6cd960a"
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Publishing event to RabbitMQ: "6c72565c-55bd-4c1f-bfe8-57a9d6cd960a"
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Publishing integration event success
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] HTTP GET /test responded 200 in 18ms
+[2026-02-25 20:21:26 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:21:26 INF] [TraceId : 0HNJKDU10BMLP:00000002] Integration Event {"Name":"Phus","Id":"6c72565c-55bd-4c1f-bfe8-57a9d6cd960a","CreationDate":"2026-02-25T13:21:26.03776Z","TraceId":"0HNJKDU10BMLP:00000002"}
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] HTTP GET /test started
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Publishing integration event: "9fcf4df4-e00c-4cfe-ad58-74ff96e6ba7d" from test_peformance
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Creating RabbitMQ channel to publish event: "675f543f-3fd3-40fe-8e32-5861e518661e" (TestEvent)
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Declaring RabbitMQ exchange to publish event: "675f543f-3fd3-40fe-8e32-5861e518661e"
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Publishing event to RabbitMQ: "675f543f-3fd3-40fe-8e32-5861e518661e"
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Publishing integration event success
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] HTTP GET /test responded 200 in 64ms
+[2026-02-25 20:33:49 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:33:49 INF] [TraceId : 0HNJKDU10BMLQ:00000001] Integration Event {"Name":"Phus","Id":"675f543f-3fd3-40fe-8e32-5861e518661e","CreationDate":"2026-02-25T13:33:49.732276Z","TraceId":"0HNJKDU10BMLQ:00000001"}
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] HTTP GET /test started
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Publishing integration event: "bfeb32cf-d4cf-4919-80c4-481cd61491d3" from test_peformance
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Creating RabbitMQ channel to publish event: "633636fd-733b-4e44-9db5-078ebcea049e" (TestEvent)
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Declaring RabbitMQ exchange to publish event: "633636fd-733b-4e44-9db5-078ebcea049e"
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Publishing event to RabbitMQ: "633636fd-733b-4e44-9db5-078ebcea049e"
+[2026-02-25 20:33:50 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Integration Event {"Name":"Phus","Id":"633636fd-733b-4e44-9db5-078ebcea049e","CreationDate":"2026-02-25T13:33:50.097826Z","TraceId":"0HNJKDU10BMLR:00000001"}
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] Publishing integration event success
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLR:00000001] HTTP GET /test responded 200 in 23ms
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] HTTP GET /test started
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Publishing integration event: "b540f807-86d6-4cac-b548-a410d851589a" from test_peformance
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Creating RabbitMQ channel to publish event: "f9f00a92-84e4-4229-a19f-e13edb5091e1" (TestEvent)
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Declaring RabbitMQ exchange to publish event: "f9f00a92-84e4-4229-a19f-e13edb5091e1"
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Publishing event to RabbitMQ: "f9f00a92-84e4-4229-a19f-e13edb5091e1"
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Publishing integration event success
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] HTTP GET /test responded 200 in 13ms
+[2026-02-25 20:33:50 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:33:50 INF] [TraceId : 0HNJKDU10BMLS:00000001] Integration Event {"Name":"Phus","Id":"f9f00a92-84e4-4229-a19f-e13edb5091e1","CreationDate":"2026-02-25T13:33:50.465442Z","TraceId":"0HNJKDU10BMLS:00000001"}
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] HTTP GET /test started
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Publishing integration event: "edd739d1-74b7-4f5c-abc1-23ddaad86696" from test_peformance
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Creating RabbitMQ channel to publish event: "7ff77943-5b84-4521-be6d-106933c7e369" (TestEvent)
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Declaring RabbitMQ exchange to publish event: "7ff77943-5b84-4521-be6d-106933c7e369"
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Publishing event to RabbitMQ: "7ff77943-5b84-4521-be6d-106933c7e369"
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Publishing integration event success
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] HTTP GET /test responded 200 in 11ms
+[2026-02-25 20:33:52 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:33:52 INF] [TraceId : 0HNJKDU10BMLS:00000002] Integration Event {"Name":"Phus","Id":"7ff77943-5b84-4521-be6d-106933c7e369","CreationDate":"2026-02-25T13:33:52.760419Z","TraceId":"0HNJKDU10BMLS:00000002"}
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] HTTP GET /test started
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Publishing integration event: "fcbe3042-ad4a-4967-a22c-be1e21e3eb04" from test_peformance
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Creating RabbitMQ channel to publish event: "728673d2-186b-465b-873b-f6b6b174b2fe" (TestEvent)
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Declaring RabbitMQ exchange to publish event: "728673d2-186b-465b-873b-f6b6b174b2fe"
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Publishing event to RabbitMQ: "728673d2-186b-465b-873b-f6b6b174b2fe"
+[2026-02-25 20:33:53 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Publishing integration event success
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] HTTP GET /test responded 200 in 13ms
+[2026-02-25 20:33:53 INF] [TraceId : 0HNJKDU10BMLT:00000001] Integration Event {"Name":"Phus","Id":"728673d2-186b-465b-873b-f6b6b174b2fe","CreationDate":"2026-02-25T13:33:53.160738Z","TraceId":"0HNJKDU10BMLT:00000001"}
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] HTTP GET /test_order started
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Publishing integration event: "e9e4ebdb-0e46-4d31-b2bc-be39ead94d96" from test_peformance
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Creating RabbitMQ channel to publish event: "ea0d4e10-478b-445f-ac55-fc3d801078cc" (OrderEvent)
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Declaring RabbitMQ exchange to publish event: "ea0d4e10-478b-445f-ac55-fc3d801078cc"
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Publishing event to RabbitMQ: "ea0d4e10-478b-445f-ac55-fc3d801078cc"
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Publishing integration event success
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] HTTP GET /test_order responded 200 in 5ms
+[2026-02-25 20:34:00 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"ea0d4e10-478b-445f-ac55-fc3d801078cc","CreationDate":"2026-02-25T13:34:00.023933Z","TraceId":"0HNJKDU10BMLT:00000002"}
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] HTTP GET /test_order started
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Publishing integration event: "7eb50664-c793-4d51-bc6a-b4c195b18317" from test_peformance
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Creating RabbitMQ channel to publish event: "4306082b-5319-4476-92a4-3541c7273036" (OrderEvent)
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Declaring RabbitMQ exchange to publish event: "4306082b-5319-4476-92a4-3541c7273036"
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Publishing event to RabbitMQ: "4306082b-5319-4476-92a4-3541c7273036"
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Publishing integration event success
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] HTTP GET /test_order responded 200 in 13ms
+[2026-02-25 20:34:00 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:34:00 INF] [TraceId : 0HNJKDU10BMLT:00000003] Integration Event {"Name":"Phus","Price":1,"Id":"4306082b-5319-4476-92a4-3541c7273036","CreationDate":"2026-02-25T13:34:00.759902Z","TraceId":"0HNJKDU10BMLT:00000003"}
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] HTTP GET /test_order started
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Publishing integration event: "c05633dd-e6b0-4cc0-8512-0e8ae3cce08c" from test_peformance
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Creating RabbitMQ channel to publish event: "b3b7450b-3034-402f-beb0-78eefd5a18e4" (OrderEvent)
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Declaring RabbitMQ exchange to publish event: "b3b7450b-3034-402f-beb0-78eefd5a18e4"
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Publishing event to RabbitMQ: "b3b7450b-3034-402f-beb0-78eefd5a18e4"
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Publishing integration event success
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] HTTP GET /test_order responded 200 in 9ms
+[2026-02-25 20:34:01 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:34:01 INF] [TraceId : 0HNJKDU10BMLU:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"b3b7450b-3034-402f-beb0-78eefd5a18e4","CreationDate":"2026-02-25T13:34:01.130542Z","TraceId":"0HNJKDU10BMLU:00000001"}
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] HTTP GET /test_order started
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Publishing integration event: "df989a66-a36e-4e7d-a2ad-77103c5369df" from test_peformance
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Creating RabbitMQ channel to publish event: "84e62f38-8ef9-45ce-a622-7294295f2de8" (OrderEvent)
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Declaring RabbitMQ exchange to publish event: "84e62f38-8ef9-45ce-a622-7294295f2de8"
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Publishing event to RabbitMQ: "84e62f38-8ef9-45ce-a622-7294295f2de8"
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Publishing integration event success
+[2026-02-25 20:34:03 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] HTTP GET /test_order responded 200 in 6ms
+[2026-02-25 20:34:03 INF] [TraceId : 0HNJKDU10BMLU:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"84e62f38-8ef9-45ce-a622-7294295f2de8","CreationDate":"2026-02-25T13:34:03.398219Z","TraceId":"0HNJKDU10BMLU:00000002"}
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] HTTP GET /test_order started
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Publishing integration event: "92b8c207-e492-4c4c-8382-cf238ecc17f0" from test_peformance
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Creating RabbitMQ channel to publish event: "c7ae814c-f486-4044-a1c9-24018d8198c4" (OrderEvent)
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Declaring RabbitMQ exchange to publish event: "c7ae814c-f486-4044-a1c9-24018d8198c4"
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Publishing event to RabbitMQ: "c7ae814c-f486-4044-a1c9-24018d8198c4"
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Publishing integration event success
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] HTTP GET /test_order responded 200 in 22ms
+[2026-02-25 20:53:26 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:53:26 INF] [TraceId : 0HNJKDU10BMLV:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"c7ae814c-f486-4044-a1c9-24018d8198c4","CreationDate":"2026-02-25T13:53:26.889855Z","TraceId":"0HNJKDU10BMLV:00000001"}
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] HTTP GET /test_order started
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Publishing integration event: "36959470-8870-438b-80cb-8ecaf4ca97fc" from test_peformance
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Creating RabbitMQ channel to publish event: "5e5c51ee-c150-4a28-8272-28c6577c31fc" (OrderEvent)
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Declaring RabbitMQ exchange to publish event: "5e5c51ee-c150-4a28-8272-28c6577c31fc"
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Publishing event to RabbitMQ: "5e5c51ee-c150-4a28-8272-28c6577c31fc"
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Publishing integration event success
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] HTTP GET /test_order responded 200 in 17ms
+[2026-02-25 20:53:27 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:53:27 INF] [TraceId : 0HNJKDU10BMLV:00000002] Integration Event {"Name":"Phus","Price":1,"Id":"5e5c51ee-c150-4a28-8272-28c6577c31fc","CreationDate":"2026-02-25T13:53:27.536054Z","TraceId":"0HNJKDU10BMLV:00000002"}
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] HTTP GET /test_order started
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Publishing integration event: "860056d3-a1c2-49a2-8264-08f2856a971f" from test_peformance
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Creating RabbitMQ channel to publish event: "97862aa2-a9ac-4b73-b64e-deee32be6fec" (OrderEvent)
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Declaring RabbitMQ exchange to publish event: "97862aa2-a9ac-4b73-b64e-deee32be6fec"
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Publishing event to RabbitMQ: "97862aa2-a9ac-4b73-b64e-deee32be6fec"
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Publishing integration event success
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] HTTP GET /test_order responded 200 in 13ms
+[2026-02-25 20:53:29 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMLV:00000003] Integration Event {"Name":"Phus","Price":1,"Id":"97862aa2-a9ac-4b73-b64e-deee32be6fec","CreationDate":"2026-02-25T13:53:29.143447Z","TraceId":"0HNJKDU10BMLV:00000003"}
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] HTTP GET /test_order started
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Publishing integration event: "8e5ca3fb-2ae0-4af7-a437-8a9aab8491d9" from test_peformance
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Creating RabbitMQ channel to publish event: "35b9ad07-748f-4d33-9d5c-f8e27d4b6cc8" (OrderEvent)
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Declaring RabbitMQ exchange to publish event: "35b9ad07-748f-4d33-9d5c-f8e27d4b6cc8"
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Publishing event to RabbitMQ: "35b9ad07-748f-4d33-9d5c-f8e27d4b6cc8"
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Publishing integration event success
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] HTTP GET /test_order responded 200 in 33ms
+[2026-02-25 20:53:29 INF] [TraceId : SYSTEM] Processing RabbitMQ event: OrderEvent
+[2026-02-25 20:53:29 INF] [TraceId : 0HNJKDU10BMM0:00000001] Integration Event {"Name":"Phus","Price":1,"Id":"35b9ad07-748f-4d33-9d5c-f8e27d4b6cc8","CreationDate":"2026-02-25T13:53:29.719156Z","TraceId":"0HNJKDU10BMM0:00000001"}
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] HTTP GET /test started
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Publishing integration event: "a5411cb3-44e5-48e1-99fe-10cbdcf5ea21" from test_peformance
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Creating RabbitMQ channel to publish event: "c9d435fc-0ef8-4f5f-980c-3e4ff258f139" (TestEvent)
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Declaring RabbitMQ exchange to publish event: "c9d435fc-0ef8-4f5f-980c-3e4ff258f139"
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Publishing event to RabbitMQ: "c9d435fc-0ef8-4f5f-980c-3e4ff258f139"
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Publishing integration event success
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] HTTP GET /test responded 200 in 7ms
+[2026-02-25 20:53:35 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000002] Integration Event {"Name":"Phus","Id":"c9d435fc-0ef8-4f5f-980c-3e4ff258f139","CreationDate":"2026-02-25T13:53:35.337608Z","TraceId":"0HNJKDU10BMM0:00000002"}
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] HTTP GET /test started
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Publishing integration event: "9d29465e-8da7-444d-9e74-203c41bdc602" from test_peformance
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Creating RabbitMQ channel to publish event: "cd3d0c9c-0274-43e4-b1bc-25c2728e71d7" (TestEvent)
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Declaring RabbitMQ exchange to publish event: "cd3d0c9c-0274-43e4-b1bc-25c2728e71d7"
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Publishing event to RabbitMQ: "cd3d0c9c-0274-43e4-b1bc-25c2728e71d7"
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Publishing integration event success
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] HTTP GET /test responded 200 in 21ms
+[2026-02-25 20:53:35 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:53:35 INF] [TraceId : 0HNJKDU10BMM0:00000003] Integration Event {"Name":"Phus","Id":"cd3d0c9c-0274-43e4-b1bc-25c2728e71d7","CreationDate":"2026-02-25T13:53:35.854453Z","TraceId":"0HNJKDU10BMM0:00000003"}
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] HTTP GET /test started
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Publishing integration event: "f6e5266e-67b7-42a6-95f0-d2a44939d3a0" from test_peformance
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Creating RabbitMQ channel to publish event: "005f69f5-603c-43bd-88d6-ade16108ab95" (TestEvent)
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Declaring RabbitMQ exchange to publish event: "005f69f5-603c-43bd-88d6-ade16108ab95"
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Publishing event to RabbitMQ: "005f69f5-603c-43bd-88d6-ade16108ab95"
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Publishing integration event success
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] HTTP GET /test responded 200 in 12ms
+[2026-02-25 20:53:37 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:53:37 INF] [TraceId : 0HNJKDU10BMM0:00000004] Integration Event {"Name":"Phus","Id":"005f69f5-603c-43bd-88d6-ade16108ab95","CreationDate":"2026-02-25T13:53:37.172325Z","TraceId":"0HNJKDU10BMM0:00000004"}
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] HTTP GET /test started
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Publishing integration event: "42a7a863-558e-41f6-b04c-af028fe58a5e" from test_peformance
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Creating RabbitMQ channel to publish event: "57dff7c2-4180-4cf5-8b5d-12b733e2781e" (TestEvent)
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Declaring RabbitMQ exchange to publish event: "57dff7c2-4180-4cf5-8b5d-12b733e2781e"
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Publishing event to RabbitMQ: "57dff7c2-4180-4cf5-8b5d-12b733e2781e"
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Publishing integration event success
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] HTTP GET /test responded 200 in 30ms
+[2026-02-25 20:58:40 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000001] Integration Event {"Name":"Phus","Id":"57dff7c2-4180-4cf5-8b5d-12b733e2781e","CreationDate":"2026-02-25T13:58:40.436262Z","TraceId":"0HNJKDU10BMM1:00000001"}
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] HTTP GET /test started
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Publishing integration event: "451856e7-b9ba-43d9-b043-bced07374603" from test_peformance
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Creating RabbitMQ channel to publish event: "511c592a-f90d-4f7c-bb43-812f5e896202" (TestEvent)
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Declaring RabbitMQ exchange to publish event: "511c592a-f90d-4f7c-bb43-812f5e896202"
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Publishing event to RabbitMQ: "511c592a-f90d-4f7c-bb43-812f5e896202"
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Publishing integration event success
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] HTTP GET /test responded 200 in 11ms
+[2026-02-25 20:58:40 INF] [TraceId : SYSTEM] Processing RabbitMQ event: TestEvent
+[2026-02-25 20:58:40 INF] [TraceId : 0HNJKDU10BMM1:00000002] Integration Event {"Name":"Phus","Id":"511c592a-f90d-4f7c-bb43-812f5e896202","CreationDate":"2026-02-25T13:58:40.707696Z","TraceId":"0HNJKDU10BMM1:00000002"}
+[2026-02-25 20:58:49 INF] [TraceId : 0HNJKDU10BMM1:00000003] HTTP GET /test_ started
+[2026-02-25 20:58:49 INF] [TraceId : 0HNJKDU10BMM1:00000003] HTTP GET /test_ responded 404 in 11ms
+[2026-02-25 20:58:49 INF] [TraceId : 0HNJKDU10BMM1:00000004] HTTP GET /test_ started
+[2026-02-25 20:58:49 INF] [TraceId : 0HNJKDU10BMM1:00000004] HTTP GET /test_ responded 404 in 0ms
+[2026-02-25 20:58:54 INF] [TraceId : 0HNJKDU10BMM1:00000005] HTTP GET /test_ started
+[2026-02-25 20:58:54 INF] [TraceId : 0HNJKDU10BMM1:00000005] HTTP GET /test_ responded 404 in 0ms
+[2026-02-25 20:58:55 INF] [TraceId : 0HNJKDU10BMM1:00000006] HTTP GET /test_ started
+[2026-02-25 20:58:55 INF] [TraceId : 0HNJKDU10BMM1:00000006] HTTP GET /test_ responded 404 in 0ms
+[2026-02-25 21:08:11 WRN] [TraceId : SYSTEM] A RabbitMQ connection is on shutdown. Trying to re-connect...
+[2026-02-25 21:08:11 INF] [TraceId : SYSTEM] RabbitMQ Client is trying to connect
