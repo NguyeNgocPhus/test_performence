@@ -13251,19 +13251,19 @@
     ]
   },
   "packageFolders": {
-    "/Users/phunn/.nuget/packages/": {}
+    "/Users/nguyen/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/phunn/Documents/Code/test_peformance/TestProject1/TestProject1.csproj",
+      "projectUniqueName": "/Users/nguyen/Documents/untitled folder/test_performence/TestProject1/TestProject1.csproj",
       "projectName": "TestProject1",
-      "projectPath": "/Users/phunn/Documents/Code/test_peformance/TestProject1/TestProject1.csproj",
-      "packagesPath": "/Users/phunn/.nuget/packages/",
-      "outputPath": "/Users/phunn/Documents/Code/test_peformance/TestProject1/obj/",
+      "projectPath": "/Users/nguyen/Documents/untitled folder/test_performence/TestProject1/TestProject1.csproj",
+      "packagesPath": "/Users/nguyen/.nuget/packages/",
+      "outputPath": "/Users/nguyen/Documents/untitled folder/test_performence/TestProject1/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/phunn/.nuget/NuGet/NuGet.Config"
+        "/Users/nguyen/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -13275,8 +13275,8 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "projectReferences": {
-            "/Users/phunn/Documents/Code/test_peformance/test_peformance/test_peformance.csproj": {
-              "projectPath": "/Users/phunn/Documents/Code/test_peformance/test_peformance/test_peformance.csproj"
+            "/Users/nguyen/Documents/untitled folder/test_performence/test_peformance/test_peformance.csproj": {
+              "projectPath": "/Users/nguyen/Documents/untitled folder/test_performence/test_peformance/test_peformance.csproj"
             }
           }
         }
@@ -13342,7 +13342,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.302/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
