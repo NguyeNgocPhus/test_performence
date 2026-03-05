@@ -1,0 +1,107 @@
+# ┌─────────────────────────────────────────────────────────────┐
+# │                     .NET / C# ignores                       │
+# └─────────────────────────────────────────────────────────────┘
+
+# ──────────────── Build / Binaries ────────────────
+bin/
+obj/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+*.userprefs
+*.cache
+*.vs/
+.vs/
+.vscode/
+
+# ──────────────── Packages / Dependencies ────────────────
+packages/
+*.nupkg
+*.snk
+*.DotSettings.user
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Aa]rchive/
+
+# ──────────────── Test results / coverage ────────────────
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+coverlet/reports/
+coverlet/*.coverage
+coverlet/*.coverage.xml
+lcov.info
+
+# ──────────────── .NET tooling & local settings ────────────────
+[Dd]ebugPS/
+[Rr]eleasePS/
+*.csproj.dotnet.temp
+*.sln.DotSettings
+[Tt]est[Rr]esult*/
+
+# Rider / ReSharper
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.sln.iml
+.idea/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+
+# ──────────────── Logs / Diagnostics ────────────────
+*.log
+logs/
+crashlogs/
+*.pdb
+*.dbg
+
+# ──────────────── Entity Framework / Migrations temp files ────────────────
+**/Migrations/*ModelSnapshot.cs
+# (you usually want to commit migrations → only ignore if you really don't)
+
+# ──────────────── Common user-specific / junk files ────────────────
+*.DS_Store
+Thumbs.db
+desktop.ini
+*.bak
+*.swp
+*~
+~$*
+
+# ──────────────── NuGet & SDK ────────────────
+global.json   # ← usually committed, uncomment if you want to ignore
+.nuget/
+dotnet-tools.json
+
+# ──────────────── Azure / Functions / WebJobs ────────────────
+local.settings.json
+*.pubxml
+*.publishproj
+wwwroot/
+
+# ──────────────── MAUI / Xamarin legacy ────────────────
+**/Platforms/Android/obj/
+**/Platforms/iOS/obj/
+**/Platforms/MacCatalyst/obj/
+**/Platforms/Windows/obj/
+*.appx
+*.appxbundle
+*.pfx
+
+# ──────────────── Very project-specific (uncomment if needed) ────────────────
+# App.config
+# appsettings*.json          ← usually committed now
+# secrets.json
+# *.key
+# *.cert
+# *.pfx
+# *.cer
