@@ -2,18 +2,20 @@ using System.Collections.Concurrent;
 using Orleans.Runtime;
 using StackExchange.Redis;
 using test_peformance.Abstractions;
-using test_peformance.Entities;
+using test_peformance.Application.Abstractions;
+using test_peformance.Domain.Entities;
 
 namespace test_peformance.Grains;
 
 public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
 {
+    private readonly IRedisUnreadStore _redisUnreadStore;
+
     private List<UserBranchAssign> listUserBranch = new()
     {
         new UserBranchAssign(){BranchId = "001", UserId = "phunn"},
         new UserBranchAssign(){BranchId = "002", UserId = "haicn"},
         new UserBranchAssign(){BranchId = "001", UserId = "vancn"}
-
     };
     private List<UserBrandAssign> listUserBrand = new()
     {
@@ -23,24 +25,23 @@ public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
     };
 
     private IDisposable timer;
-    public UnreadGrain()
+
+    public UnreadGrain(IRedisUnreadStore redisUnreadStore)
     {
+        _redisUnreadStore = redisUnreadStore;
         Console.WriteLine("Creating DashboardGrain");
         timer = RegisterTimer(UpdateUnread, null!, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
     }
-    
 
     public Task UpdateUnreadConversation(UpdateUnreadConversation message)
     {
         State.ConcurrentQueue.Enqueue(message);
-        
         return Task.CompletedTask;
     }
 
     private async Task UpdateUnread(object? state)
     {
-        var redis = await ConnectionMultiplexer.ConnectAsync("localhost:6379");
-        IDatabase db = redis.GetDatabase();
+        IDatabase db = _redisUnreadStore.GetDatabase();
 
         var count = State.ConcurrentQueue.Count;
         var listUnread = new List<UpdateUnreadConversation>();
@@ -56,12 +57,11 @@ public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
         foreach (var item in listUnread)
         {
             var listUBranch = listUserBranch.Where(x => x.BranchId == item.BranchId && x.UserId != item.UserId).ToList();
-            var listUBrand = listUserBrand.Where(x => x.BrandName == item.BrandName  && x.UserId != item.UserId).ToList();
+            var listUBrand = listUserBrand.Where(x => x.BrandName == item.BrandName && x.UserId != item.UserId).ToList();
             foreach (var u in listUBranch)
             {
                 AddFieldIfNotExists(dicUpdate, u.UserId, item.OrderId, "1");
             }
-
             foreach (var u in listUBrand)
             {
                 AddFieldIfNotExists(dicUpdate, u.UserId, item.OrderId, "1");
@@ -72,37 +72,31 @@ public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
         {
             await db.HashSetAsync(data.Key, data.Value);
         }
-
-        await Task.CompletedTask;
     }
 
     private void AddFieldIfNotExists(Dictionary<string, HashEntry[]> dict, string key, string field, string value)
     {
         if (!dict.ContainsKey(key))
         {
-            // Nếu chưa có key, thêm mới luôn
             dict[key] = new[] { new HashEntry(field, value) };
         }
         else
         {
             var existingEntries = dict[key];
-
-            // Kiểm tra field đã tồn tại chưa
             bool exists = existingEntries.Any(e => e.Name == field);
-
             if (!exists)
             {
-                // Thêm mới field nếu chưa có
-                var updated = existingEntries.Append(new HashEntry(field, value)).ToArray();
-                dict[key] = updated;
+                dict[key] = existingEntries.Append(new HashEntry(field, value)).ToArray();
             }
         }
     }
 }
+
 public class UnreadState
 {
     public ConcurrentQueue<UpdateUnreadConversation> ConcurrentQueue { get; set; } = new();
 }
+
 class UserBranchAssign
 {
     public string UserId { get; set; }

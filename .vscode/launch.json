@@ -10,7 +10,7 @@
             "request": "launch",
             "preLaunchTask": "build",
             // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/test_peformance/bin/Debug/net7.0/test_peformance.dll",
+            "program": "${workspaceFolder}/test_peformance/bin/Debug/net9.0/test_peformance.dll",
             "args": [],
             "cwd": "${workspaceFolder}/test_peformance",
             "stopAtEntry": false,
@@ -21,6 +21,9 @@
             },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "logging": {
+                "moduleLoad": false
             },
             "sourceFileMap": {
                 "/Views": "${workspaceFolder}/Views"

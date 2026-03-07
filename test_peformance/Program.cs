@@ -1,10 +1,6 @@
-using EventBus;
-using EventBus.Abstractions;
-using EventBusRabbitMQ;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.FileProviders;
-using Microsoft.IdentityModel.Tokens;
+using test_peformance.Infrastructure.Messaging.EventBus;
+using test_peformance.Infrastructure.Messaging.RabbitMQ;
 using OpenTelemetry.Exporter;
 using OpenTelemetry.Logs;
 using OpenTelemetry.Metrics;
@@ -14,16 +10,21 @@ using RabbitMQ.Client;
 using Serilog;
 using Serilog.Context;
 using Serilog.Events;
-using test_peformance;
-using test_peformance.Abstractions;
-using test_peformance.Event;
+using test_peformance.Application;
+using test_peformance.Events;
 using test_peformance.EventHandling;
-// Tesst
+using test_peformance.Infrastructure.Cache;
+using test_peformance.Infrastructure.Messaging;
+using test_peformance.Infrastructure.Persistence;
+using test_peformance.Infrastructure.Security;
+using test_peformance.Presentation.Hubs;
+using test_peformance.Presentation.Middleware;
+
 var builder = WebApplication.CreateBuilder(args);
-// Configure Serilog with filtering and TraceId formatting
+
+// Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
-    // Filter out noisy framework logs
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Information)
@@ -32,11 +33,9 @@ Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("System", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.Authentication", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.Authorization", LogEventLevel.Warning)
-    .MinimumLevel.Override("Microsoft.AspNetCore.Hosting", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.Hosting.Diagnostics", LogEventLevel.Warning)
     .MinimumLevel.Override("Microsoft.AspNetCore.HttpsPolicy", LogEventLevel.Error)
     .Enrich.FromLogContext()
-    // .Enrich.With(new TraceIdEnricher("SYSTEM"))
     .WriteTo.Console(
         outputTemplate:
         "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] [TraceId : {RequestId}] {Message:lj}{NewLine}{Exception}",
@@ -46,159 +45,112 @@ Log.Logger = new LoggerConfiguration()
         outputTemplate:
         "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] [TraceId : {RequestId}] {Message:lj}{NewLine}{Exception}")
     .CreateLogger();
+
 LogContext.PushProperty("RequestId", "SYSTEM");
 builder.Host.UseSerilog();
+
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-string redisConnection = builder.Configuration.GetConnectionString("Redis");
-builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
-var connectionString = builder.Configuration.GetConnectionString("ConnectionStrings");
 
-// dotnet ef migrations add "Conversation" --project test_peformance --context ApplicationDbContext --startup-project test_peformance --output-dir Migrations
-// dotnet ef database update --project test_peformance --startup-project test_peformance --context ApplicationDbContext
+var isLoadRedis = builder.Configuration.GetValue<bool>("IsLoadRedis");
+var isLoadRabbit = builder.Configuration.GetValue<bool>("IsLoadRabbit");
+var isLoadKafka = builder.Configuration.GetValue<bool>("IsLoadKafka");
 
-builder.Services.AddPooledDbContextFactory<ApplicationDbContext>(option =>
-{
-    option.UseSqlServer(connectionString, sqlOptions =>
-    {
-        // sqlOptions.AddBulkOperationSupport();
-    }).UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-    option.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => { loggingBuilder.AddConsole(); }));
-});
+builder.Services
+    .AddApplicationServices()
+    .AddPersistence(builder.Configuration)
+    .AddJwtAuth(builder.Configuration);
 
-// // Thêm Redis vào DI container
-// string redisConnection  = builder.Configuration.GetConnectionString("Redis");
-// builder.Services.AddSingleton(new RedisCacheService(redisConnection));
+if (isLoadKafka)
+    builder.Services.AddKafka(builder.Configuration);
 
-// ???
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer("Hub", options =>
-{
-    var Key = "UseQueryTrackingBehaviorQueryTrackingBehavior"u8.ToArray();
-    options.TokenValidationParameters = new TokenValidationParameters
-    {
-        ValidateIssuer = false, // on production make it true
-        ValidateAudience = false, // on production make it true
-        ValidateLifetime = false,
-        ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Key),
-        ClockSkew = TimeSpan.Zero
-    };
-    options.Events = new JwtBearerEvents
-    {
-        OnMessageReceived = context =>
-        {
-            var accessToken = context.Request.Query["access_token"];
-            // If the request is for our hub...
-            var path = context.HttpContext.Request.Path;
-            if (!string.IsNullOrEmpty(accessToken) &&
-                (path.StartsWithSegments("/streaming-hub")))
-            {
-                // Read the token out of the query string
-                context.Token = accessToken;
-            }
+if (isLoadRedis)
+    builder.Services.AddRedis(builder.Configuration);
 
-            return Task.CompletedTask;
-        }
-    };
-});
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", policy => { policy.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
 });
 builder.Services.AddSignalR(hubOptions => { hubOptions.EnableDetailedErrors = true; });
-builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase2<,>));
-builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
-builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
-builder.Services.AddScoped(typeof(IJwtTokenService), typeof(JwtTokenService));
-// builder.Services.AddHostedService<MyJobService>();
-builder.Services.AddScoped<ApplicationDbContext>();
-builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
 
-// builder.Services.AddHostedService<GrainBackgroundService>();
-builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
+if (isLoadRabbit)
 {
-    var logger = sp.GetRequiredService<ILogger<DefaultRabbitMqPersistentConnection>>();
-    var factory = new ConnectionFactory()
+    builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
+    builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     {
-        HostName = builder.Configuration["EventBusConnection"],
-        DispatchConsumersAsync = true
-    };
+        var logger = sp.GetRequiredService<ILogger<DefaultRabbitMqPersistentConnection>>();
+        var factory = new ConnectionFactory()
+        {
+            HostName = builder.Configuration["EventBusConnection"],
+            DispatchConsumersAsync = true
+        };
 
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusUserName"]))
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusUserName"]))
+            factory.UserName = builder.Configuration["EventBusUserName"];
+
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusPassword"]))
+            factory.Password = builder.Configuration["EventBusPassword"];
+
+        var retryCount = 5;
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
+            retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
+
+        logger.LogInformation("EventBus connection string: {Host}", builder.Configuration["EventBusConnection"]);
+        return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
+    });
+    builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
     {
-        factory.UserName = builder.Configuration["EventBusUserName"];
-    }
+        var subscriptionClientName = builder.Configuration["SubscriptionClientName"];
+        var rabbitMqPersistentConnection = sp.GetRequiredService<IRabbitMqPersistentConnection>();
+        var iLifetimeScope = sp.GetRequiredService<IServiceScopeFactory>();
+        var eventBusSubscriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
 
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusPassword"]))
-    {
-        factory.Password = builder.Configuration["EventBusPassword"];
-    }
+        var retryCount = 5;
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
+            retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
 
-    var retryCount = 5;
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
-    {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
-    }
+        return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,
+            subscriptionClientName, retryCount);
+    });
+}
 
-    logger.LogInformation($"EventBus connection string: {builder.Configuration["EventBusConnection"]}");
-    return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
-});
-builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
-{
-    var subscriptionClientName = builder.Configuration["SubscriptionClientName"];
-    var rabbitMqPersistentConnection = sp.GetRequiredService<IRabbitMqPersistentConnection>();
-    var iLifetimeScope = sp.GetRequiredService<IServiceScopeFactory>();
-    var logger = sp.GetRequiredService<ILogger<EventBusRabbitMq>>();
-    var eventBusSubscriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
-
-    var retryCount = 5;
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
-    {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
-    }
-
-    return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,
-        subscriptionClientName, retryCount);
-});
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
-builder.Services.AddScoped<TestEventHandlerEventHandler>();
-builder.Services.AddScoped<OrderEventHandlerEventHandler>();
 
-builder.Services.AddSingleton<IDateTimeProvider, SystemDateTimeProvider>();
+if (isLoadRabbit)
+{
+    builder.Services.AddScoped<TestEventHandlerEventHandler>();
+    builder.Services.AddScoped<OrderEventHandlerEventHandler>();
+}
 
-var otlpEndpoint = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] 
-                   ?? "http://localhost:4317";
+var otlpEndpoint = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"] ?? "http://localhost:4317";
 
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing => tracing
-        // The rest of your setup code goes here
         .AddAspNetCoreInstrumentation()
         .AddOtlpExporter())
     .WithMetrics(metrics => metrics
-        // The rest of your setup code goes here
         .AddAspNetCoreInstrumentation()
         .AddRuntimeInstrumentation()
-        
-        .AddOtlpExporter());;
+        .AddOtlpExporter());
 
 var app = builder.Build();
-var eventBus = app.Services.GetRequiredService<IEventBus>();
-eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
-eventBus.Subscribe<OrderEvent, OrderEventHandlerEventHandler>();
+
+if (isLoadRabbit)
+{
+    var eventBus = app.Services.GetRequiredService<IEventBus>();
+    eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
+    eventBus.Subscribe<OrderEvent, OrderEventHandlerEventHandler>();
+}
+
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
         Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "uploads")),
     RequestPath = "/uploads"
 });
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -212,7 +164,6 @@ app.UseRouting();
 app.UseHttpsRedirection();
 app.MapHub<ChatHub>("/streaming-hub").RequireAuthorization();
 app.UseAuthorization();
-
 app.MapControllers();
 
 try

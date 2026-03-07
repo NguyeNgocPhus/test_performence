@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using test_peformance;
+using test_peformance.Infrastructure.Persistence;
 
 #nullable disable
 
 namespace test_peformance.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(test_peformance.Infrastructure.Persistence.ApplicationDbContext))]
     [Migration("20250323134357_Message1")]
     partial class Message1
     {
@@ -36,7 +36,7 @@ namespace test_peformance.Migrations
                         });
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Conversation", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Conversation", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -61,7 +61,7 @@ namespace test_peformance.Migrations
                     b.ToTable("Conversations");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Department", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Department", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -83,7 +83,7 @@ namespace test_peformance.Migrations
                     b.ToTable("Department", (string)null);
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Employee", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Employee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -109,7 +109,7 @@ namespace test_peformance.Migrations
                     b.ToTable("Employee", (string)null);
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.IntValueEntity", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.IntValueEntity", b =>
                 {
                     b.Property<int>("Values")
                         .ValueGeneratedOnAdd()
@@ -122,7 +122,7 @@ namespace test_peformance.Migrations
                     b.ToTable("IntValueEntity");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Message", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Message", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -154,9 +154,9 @@ namespace test_peformance.Migrations
                     b.ToTable("Messages");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Employee", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Employee", b =>
                 {
-                    b.HasOne("test_peformance.Entities.Department", "Department")
+                    b.HasOne("test_peformance.Domain.Entities.Department", "Department")
                         .WithMany("Employees")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -165,9 +165,9 @@ namespace test_peformance.Migrations
                     b.Navigation("Department");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Message", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Message", b =>
                 {
-                    b.HasOne("test_peformance.Entities.Conversation", "Conversation")
+                    b.HasOne("test_peformance.Domain.Entities.Conversation", "Conversation")
                         .WithMany("Messages")
                         .HasForeignKey("ConversationId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -176,12 +176,12 @@ namespace test_peformance.Migrations
                     b.Navigation("Conversation");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Conversation", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Conversation", b =>
                 {
                     b.Navigation("Messages");
                 });
 
-            modelBuilder.Entity("test_peformance.Entities.Department", b =>
+            modelBuilder.Entity("test_peformance.Domain.Entities.Department", b =>
                 {
                     b.Navigation("Employees");
                 });

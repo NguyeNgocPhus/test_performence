@@ -1,4 +1,4 @@
-using test_peformance.Entities;
+using test_peformance.Domain.Entities;
 
 namespace test_peformance.Abstractions;
 
