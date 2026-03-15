@@ -51,10 +51,10 @@ jobs:
           cd Builder
 
           # Thay thế toàn bộ image line của order-service
-          sed -i "s|image: nguyenphu/testperformance:.*|image: nguyenphu/testperformance:${SHORT_SHA}|" stasks/testperformance.yml
+          sed -i "s|image: nguyenphu/testperformance:.*|image: nguyenphu/testperformance:${SHORT_SHA}|" stacks/testperformance.yml
 
           # Verify kết quả
-          grep "image:.*testperformance" stasks/testperformance.yml
+          grep "image:.*testperformance" stacks/testperformance.yml
 
       - name: Commit & Push to manifest repo
         env:
