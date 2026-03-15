@@ -16,7 +16,7 @@ public class WeatherForecastController : ControllerBase
     private readonly ApplicationDbContext _dbContext;
     private readonly IEventBus _eventBus;
     private readonly IWebHostEnvironment _env;
-    private readonly string _uploadPath;
+    private readonly string _uploadPath; 
     public WeatherForecastController(IWebHostEnvironment env,ILogger<WeatherForecastController> logger, ApplicationDbContext dbContext, IEventBus eventBus)
     {
         _dbContext = dbContext;
