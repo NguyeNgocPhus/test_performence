@@ -48,7 +48,7 @@ jobs:
           SHORT_SHA: ${{ steps.vars.outputs.SHORT_SHA }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         run: |
-          cd your-manifest-repo
+          cd Builder
 
           # Thay thế toàn bộ image line của order-service
           sed -i "s|image: nguyenphu/testperformance:.*|image: nguyenphu/testperformance:${SHORT_SHA}|" stasks/testperformance.yml
@@ -60,7 +60,7 @@ jobs:
         env:
           SHORT_SHA: ${{ steps.vars.outputs.SHORT_SHA }}
         run: |
-          cd your-manifest-repo
+          cd Builder
 
           git config user.email "ci-bot@yourcompany.com"
           git config user.name "CI Bot"
