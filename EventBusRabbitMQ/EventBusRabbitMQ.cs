@@ -18,7 +18,7 @@ public class EventBusRabbitMq : IEventBus, IDisposable
     private string? _queueName;
 
     public EventBusRabbitMq(IRabbitMqPersistentConnection persistentConnection,
-        IServiceScopeFactory autofac, IEventBusSubscriptionsManager subsManager, string queueName = null, int retryCount = 5)
+        IServiceScopeFactory autofac, IEventBusSubscriptionsManager subsManager, string? queueName = null, int retryCount = 5)
     {
         _persistentConnection = persistentConnection ?? throw new ArgumentNullException(nameof(persistentConnection));
         _subsManager = subsManager ?? new InMemoryEventBusSubscriptionsManager();
@@ -258,8 +258,8 @@ public class EventBusRabbitMq : IEventBus, IDisposable
                 else
                 {
                     var eventType = _subsManager.GetEventTypeByName(eventName);
-                    var integrationEvent = JsonSerializer.Deserialize(message, eventType, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
-                    var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
+                    var integrationEvent = JsonSerializer.Deserialize(message, eventType!, new JsonSerializerOptions() { PropertyNameCaseInsensitive = true });
+                    var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType!);
 
                     await Task.Yield();
                     await (Task)concreteType.GetMethod("Handle")!.Invoke(handler, new object[] { integrationEvent! })!;

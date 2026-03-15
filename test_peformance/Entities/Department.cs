@@ -5,9 +5,9 @@ namespace test_peformance.Entities;
 
 public class Department : BaseEntity
 {
-    public string Name { get; set; }
-    
+    public string Name { get; set; } = string.Empty;
+
     [ConcurrencyCheck]
-    public Guid Version { get; set; }      
-    public virtual ICollection<Employee> Employees { get; set; }
+    public Guid Version { get; set; }
+    public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
 }

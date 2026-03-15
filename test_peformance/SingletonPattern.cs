@@ -4,7 +4,7 @@ public class AppDbConfig
 {
     public string Server { get; private set; }
     public string UserName { get; private set; }
-    private static AppDbConfig _singletonPattern = null;
+    private static AppDbConfig? _singletonPattern = null;
     private static readonly object padlock = new object();
 
     private AppDbConfig(string server, string userName)

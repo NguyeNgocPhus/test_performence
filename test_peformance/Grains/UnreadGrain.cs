@@ -26,7 +26,7 @@ public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
     public UnreadGrain()
     {
         Console.WriteLine("Creating DashboardGrain");
-        timer = this.RegisterGrainTimer(UpdateUnread, null!, new() { DueTime = TimeSpan.FromSeconds(2), Period = TimeSpan.FromSeconds(2), Interleave = true });
+        timer = this.RegisterGrainTimer(UpdateUnread, (object?)null, new() { DueTime = TimeSpan.FromSeconds(2), Period = TimeSpan.FromSeconds(2), Interleave = true });
     }
     
 

@@ -91,8 +91,9 @@ public class CronjobController : ControllerBase
         // 👉 Thực hiện logic xử lý của bạn ở đây
     }
 
-    private async Task SaveLastRun(SystemConfig systemConfig)
+    private async Task SaveLastRun(SystemConfig? systemConfig)
     {
+        if (systemConfig == null) return;
         var now = _dateTimeProvider.Now();
         systemConfig.TimeChanged = now;
         _context.SystemConfig.Update(systemConfig);

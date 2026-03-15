@@ -60,7 +60,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-string redisConnection = builder.Configuration.GetConnectionString("Redis");
+string? redisConnection = builder.Configuration.GetConnectionString("Redis");
 builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
 var connectionStringMaster = builder.Configuration.GetConnectionString("Master");
 var connectionStringReplica = builder.Configuration.GetConnectionString("Replica");
@@ -162,7 +162,7 @@ builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     var retryCount = 5;
     if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
     {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
+        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
     }
     logger.LogInformation("EventBus connection string: {EventBusConnection}", builder.Configuration["EventBusConnection"]);
     return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
@@ -179,7 +179,7 @@ builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
     var retryCount = 5;
     if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
     {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
+        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
     }
 
     return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,

@@ -83,7 +83,7 @@ public partial class InMemoryEventBusSubscriptionsManager : IEventBusSubscriptio
     }
 
 
-    private void DoRemoveHandler(string eventName, SubscriptionInfo subsToRemove)
+    private void DoRemoveHandler(string eventName, SubscriptionInfo? subsToRemove)
     {
         if (subsToRemove != null)
         {
