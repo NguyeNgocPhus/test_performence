@@ -68,8 +68,7 @@ public class DefaultRabbitMqPersistentConnection
 
             policy.Execute(() =>
             {
-                _connection = _connectionFactory
-                        .CreateConnection();
+                 
             });
 
             if (IsConnected)

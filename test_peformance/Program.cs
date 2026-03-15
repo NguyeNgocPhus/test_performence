@@ -60,8 +60,18 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-string? redisConnection = builder.Configuration.GetConnectionString("Redis");
 builder.Configuration.GetSection("AppDb").Get<AppDbOption>();
+
+if (loadRedis)
+{
+    var redisConnection = builder.Configuration.GetConnectionString("Redis");
+    builder.Services.AddStackExchangeRedisCache(options => { options.Configuration = redisConnection; });
+    Log.Information("Redis enabled, connecting to {Redis}", redisConnection);
+}
+else
+{
+    Log.Information("Redis disabled (LOAD_REDIS != Y), skipping Redis connection");
+}
 var connectionStringMaster = builder.Configuration.GetConnectionString("Master");
 var connectionStringReplica = builder.Configuration.GetConnectionString("Replica");
 
@@ -137,54 +147,63 @@ builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddScoped<ApplicationDbReplicaContext>();
 
-builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
-
-// builder.Services.AddHostedService<GrainBackgroundService>();
-builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
+if (loadRabbit)
 {
-    var logger = sp.GetRequiredService<ILogger<DefaultRabbitMqPersistentConnection>>();
-    var factory = new ConnectionFactory()
-    {
-        HostName = builder.Configuration["EventBusConnection"],
-        DispatchConsumersAsync = true
-    };
+    builder.Services.AddSingleton<IEventBusSubscriptionsManager, InMemoryEventBusSubscriptionsManager>();
 
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusUserName"]))
+    // builder.Services.AddHostedService<GrainBackgroundService>();
+    builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     {
-        factory.UserName = builder.Configuration["EventBusUserName"];
-    }
+        var logger = sp.GetRequiredService<ILogger<DefaultRabbitMqPersistentConnection>>();
+        var factory = new ConnectionFactory()
+        {
+            HostName = builder.Configuration["EventBusConnection"],
+            DispatchConsumersAsync = true
+        };
 
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusPassword"]))
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusUserName"]))
+        {
+            factory.UserName = builder.Configuration["EventBusUserName"];
+        }
+
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusPassword"]))
+        {
+            factory.Password = builder.Configuration["EventBusPassword"];
+        }
+
+        var retryCount = 5;
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
+        {
+            retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
+        }
+        logger.LogInformation("EventBus connection string: {EventBusConnection}", builder.Configuration["EventBusConnection"]);
+        return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
+    });
+
+    builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
     {
-        factory.Password = builder.Configuration["EventBusPassword"];
-    }
+        var subscriptionClientName = builder.Configuration["SubscriptionClientName"];
+        var rabbitMqPersistentConnection = sp.GetRequiredService<IRabbitMqPersistentConnection>();
+        var iLifetimeScope = sp.GetRequiredService<IServiceScopeFactory>();
+        var eventBusSubscriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
 
-    var retryCount = 5;
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
-    {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
-    }
-    logger.LogInformation("EventBus connection string: {EventBusConnection}", builder.Configuration["EventBusConnection"]);
-    return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
-});
+        var retryCount = 5;
+        if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
+        {
+            retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
+        }
 
-builder.Services.AddSingleton<IEventBus, EventBusRabbitMq>(sp =>
+        return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,
+            subscriptionClientName, retryCount);
+    });
+
+    Log.Information("RabbitMQ enabled");
+}
+else
 {
-    var subscriptionClientName = builder.Configuration["SubscriptionClientName"];
-    var rabbitMqPersistentConnection = sp.GetRequiredService<IRabbitMqPersistentConnection>();
-    var iLifetimeScope = sp.GetRequiredService<IServiceScopeFactory>();
-    var logger = sp.GetRequiredService<ILogger<EventBusRabbitMq>>();
-    var eventBusSubscriptionsManager = sp.GetRequiredService<IEventBusSubscriptionsManager>();
-
-    var retryCount = 5;
-    if (!string.IsNullOrEmpty(builder.Configuration["EventBusRetryCount"]))
-    {
-        retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]!);
-    }
-
-    return new EventBusRabbitMq(rabbitMqPersistentConnection, iLifetimeScope, eventBusSubscriptionsManager,
-        subscriptionClientName, retryCount);
-});
+    builder.Services.AddSingleton<IEventBus, NullEventBus>();
+    Log.Information("RabbitMQ disabled (LOAD_RABBIT != Y), skipping RabbitMQ connection");
+}
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddHealthChecks();
 builder.Services.AddScoped<TestEventHandlerEventHandler>();
@@ -203,8 +222,11 @@ builder.Services.AddScoped(p =>
 builder.Services.AddTransient<RywRoutingMiddleware>();
 
 var app = builder.Build();
-var eventBus = app.Services.GetRequiredService<IEventBus>();
-eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
+if (loadRabbit)
+{
+    var eventBus = app.Services.GetRequiredService<IEventBus>();
+    eventBus.Subscribe<TestEvent, TestEventHandlerEventHandler>();
+}
 
 app.UseStaticFiles(new StaticFileOptions
 {
@@ -242,4 +264,23 @@ catch (Exception ex)
 finally
 {
     Log.CloseAndFlush();
+}
+
+public class NullEventBus : IEventBus
+{
+    public void Publish(EventBus.Events.IntegrationEvent @event) { }
+
+    public void Subscribe<T, TH>()
+        where T : EventBus.Events.IntegrationEvent
+        where TH : IIntegrationEventHandler<T> { }
+
+    public void SubscribeDynamic<TH>(string eventName)
+        where TH : IDynamicIntegrationEventHandler { }
+
+    public void Unsubscribe<T, TH>()
+        where TH : IIntegrationEventHandler<T>
+        where T : EventBus.Events.IntegrationEvent { }
+
+    public void UnsubscribeDynamic<TH>(string eventName)
+        where TH : IDynamicIntegrationEventHandler { }
 }
