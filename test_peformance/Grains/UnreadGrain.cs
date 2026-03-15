@@ -26,7 +26,7 @@ public class UnreadGrain : Grain<UnreadState>, IUnreadGrain
     public UnreadGrain()
     {
         Console.WriteLine("Creating DashboardGrain");
-        timer = RegisterTimer(UpdateUnread, null!, TimeSpan.FromSeconds(2), TimeSpan.FromSeconds(2));
+        timer = this.RegisterGrainTimer(UpdateUnread, null!, new() { DueTime = TimeSpan.FromSeconds(2), Period = TimeSpan.FromSeconds(2), Interleave = true });
     }
     
 
@@ -105,12 +105,12 @@ public class UnreadState
 }
 class UserBranchAssign
 {
-    public string UserId { get; set; }
-    public string BranchId { get; set; }
+    public string UserId { get; set; } = string.Empty;
+    public string BranchId { get; set; } = string.Empty;
 }
 
 class UserBrandAssign
 {
-    public string UserId { get; set; }
-    public string BrandName { get; set; }
+    public string UserId { get; set; } = string.Empty;
+    public string BrandName { get; set; } = string.Empty;
 }

@@ -64,6 +64,6 @@ jobs:
 
           git config user.email "ci-bot@yourcompany.com"
           git config user.name "CI Bot"
-          git add stasks/testperformance.yml
+          git add stacks/testperformance.yml
           git diff --cached --quiet || git commit -m "ci: update testperformance image tag to ${SHORT_SHA}"
           git push

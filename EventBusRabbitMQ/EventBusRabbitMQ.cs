@@ -15,7 +15,7 @@ public class EventBusRabbitMq : IEventBus, IDisposable
     private readonly int _retryCount;
 
     private IModel _consumerChannel;
-    private string _queueName;
+    private string? _queueName;
 
     public EventBusRabbitMq(IRabbitMqPersistentConnection persistentConnection,
         IServiceScopeFactory autofac, IEventBusSubscriptionsManager subsManager, string queueName = null, int retryCount = 5)
@@ -29,7 +29,7 @@ public class EventBusRabbitMq : IEventBus, IDisposable
         _subsManager.OnEventRemoved += SubsManager_OnEventRemoved;
     }
 
-    private void SubsManager_OnEventRemoved(object sender, string eventName)
+    private void SubsManager_OnEventRemoved(object? sender, string eventName)
     {
         if (!_persistentConnection.IsConnected)
         {
@@ -262,7 +262,7 @@ public class EventBusRabbitMq : IEventBus, IDisposable
                     var concreteType = typeof(IIntegrationEventHandler<>).MakeGenericType(eventType);
 
                     await Task.Yield();
-                    await (Task)concreteType.GetMethod("Handle").Invoke(handler, new object[] { integrationEvent });
+                    await (Task)concreteType.GetMethod("Handle")!.Invoke(handler, new object[] { integrationEvent! })!;
                 }
             }
         }

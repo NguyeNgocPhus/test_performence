@@ -17,7 +17,7 @@ public class IntegrationEventLogService : IIntegrationEventLogService, IDisposab
                 .UseSqlServer(_dbConnection)
                 .Options);
 
-        _eventTypes = Assembly.Load(Assembly.GetEntryAssembly().FullName)
+        _eventTypes = Assembly.Load(Assembly.GetEntryAssembly()!.FullName!)
             .GetTypes()
             .Where(t => t.Name.EndsWith(nameof(IntegrationEvent)))
             .ToList();
@@ -38,7 +38,7 @@ public class IntegrationEventLogService : IIntegrationEventLogService, IDisposab
 
         if (result.Any())
             return result.OrderBy(o => o.CreationTime)
-                .Select(e => e.DeserializeJsonContent(_eventTypes.Find(t => t.Name == e.EventTypeShortName)));
+                .Select(e => e.DeserializeJsonContent(_eventTypes.Find(t => t.Name == e.EventTypeShortName)!));
 
         return new List<IntegrationEventLogEntry>();
     }

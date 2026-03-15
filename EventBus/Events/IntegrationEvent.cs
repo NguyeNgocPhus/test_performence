@@ -22,5 +22,5 @@ public class IntegrationEvent
     [JsonInclude]
     public DateTime CreationDate { get; private init; }
     [JsonInclude]
-    public string TraceId { get; set; }
+    public string? TraceId { get; set; }
 }

@@ -6,7 +6,7 @@ public class DefaultRabbitMqPersistentConnection
     private readonly IConnectionFactory _connectionFactory;
     private readonly ILogger<DefaultRabbitMqPersistentConnection> _logger;
     private readonly int _retryCount;
-    private IConnection _connection;
+    private IConnection? _connection;
     public bool Disposed;
 
     readonly object _syncRoot = new();
@@ -27,7 +27,7 @@ public class DefaultRabbitMqPersistentConnection
             throw new InvalidOperationException("No RabbitMQ connections are available to perform this action");
         }
 
-        return _connection.CreateModel();
+        return _connection!.CreateModel();
     }
 
     public void Dispose()
@@ -38,10 +38,13 @@ public class DefaultRabbitMqPersistentConnection
 
         try
         {
-            _connection.ConnectionShutdown -= OnConnectionShutdown;
-            _connection.CallbackException -= OnCallbackException;
-            _connection.ConnectionBlocked -= OnConnectionBlocked;
-            _connection.Dispose();
+            if (_connection != null)
+            {
+                _connection.ConnectionShutdown -= OnConnectionShutdown;
+                _connection.CallbackException -= OnCallbackException;
+                _connection.ConnectionBlocked -= OnConnectionBlocked;
+                _connection.Dispose();
+            }
         }
         catch (IOException ex)
         {
@@ -71,7 +74,7 @@ public class DefaultRabbitMqPersistentConnection
 
             if (IsConnected)
             {
-                _connection.ConnectionShutdown += OnConnectionShutdown;
+                _connection!.ConnectionShutdown += OnConnectionShutdown;
                 _connection.CallbackException += OnCallbackException;
                 _connection.ConnectionBlocked += OnConnectionBlocked;
 
@@ -88,7 +91,7 @@ public class DefaultRabbitMqPersistentConnection
         }
     }
 
-    private void OnConnectionBlocked(object sender, ConnectionBlockedEventArgs e)
+    private void OnConnectionBlocked(object? sender, ConnectionBlockedEventArgs e)
     {
         if (Disposed) return;
 
@@ -97,7 +100,7 @@ public class DefaultRabbitMqPersistentConnection
         TryConnect();
     }
 
-    void OnCallbackException(object sender, CallbackExceptionEventArgs e)
+    void OnCallbackException(object? sender, CallbackExceptionEventArgs e)
     {
         if (Disposed) return;
 
@@ -106,7 +109,7 @@ public class DefaultRabbitMqPersistentConnection
         TryConnect();
     }
 
-    void OnConnectionShutdown(object sender, ShutdownEventArgs reason)
+    void OnConnectionShutdown(object? sender, ShutdownEventArgs reason)
     {
         if (Disposed) return;
 

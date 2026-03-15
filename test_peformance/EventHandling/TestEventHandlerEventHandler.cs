@@ -17,10 +17,10 @@ public class TestEventHandlerEventHandler : IIntegrationEventHandler<TestEvent>
     /// <param name="event">       
     /// </param>
     /// <returns></returns>
-    public async Task Handle(TestEvent @event)
+    public Task Handle(TestEvent @event)
     {
-        LogContext.PushProperty("RequestId",  @event.TraceId);
-
-        Log.Information($"GracePeriodConfirmed Integration Event {JsonSerializer.Serialize(@event)}");
+        LogContext.PushProperty("RequestId", @event.TraceId);
+        Log.Information("GracePeriodConfirmed Integration Event {Event}", JsonSerializer.Serialize(@event));
+        return Task.CompletedTask;
     }
 }

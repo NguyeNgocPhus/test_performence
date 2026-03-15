@@ -114,7 +114,7 @@ builder.Services.AddAuthentication(options =>
             // If the request is for our hub...
             var path = context.HttpContext.Request.Path;
             if (!string.IsNullOrEmpty(accessToken) &&
-                (path.StartsWithSegments("/streaming-hub")))
+                path.StartsWithSegments("/streaming-hub"))
             {
                 // Read the token out of the query string
                 context.Token = accessToken;
@@ -131,8 +131,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddSignalR(hubOptions => { hubOptions.EnableDetailedErrors = true; });
 builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase2<,>));
 builder.Services.AddScoped(typeof(IRepositoryBase<,>), typeof(RepositoryBase<,>));
-builder.Services.AddScoped(typeof(IUnitOfWork), typeof(EFUnitOfWork));
-builder.Services.AddScoped(typeof(IJwtTokenService), typeof(JwtTokenService));
+builder.Services.AddScoped<IUnitOfWork, EFUnitOfWork>();
+builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 // builder.Services.AddHostedService<MyJobService>();
 builder.Services.AddScoped<ApplicationDbContext>();
 builder.Services.AddScoped<ApplicationDbReplicaContext>();
@@ -164,7 +164,7 @@ builder.Services.AddSingleton<IRabbitMqPersistentConnection>(sp =>
     {
         retryCount = int.Parse(builder.Configuration["EventBusRetryCount"]);
     }
-    logger.LogInformation($"EventBus connection string: {builder.Configuration["EventBusConnection"]}");
+    logger.LogInformation("EventBus connection string: {EventBusConnection}", builder.Configuration["EventBusConnection"]);
     return new DefaultRabbitMqPersistentConnection(factory, logger, retryCount);
 });
 

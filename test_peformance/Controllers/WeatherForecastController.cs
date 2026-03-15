@@ -32,7 +32,7 @@ public class WeatherForecastController : ControllerBase
     
     [HttpGet]
     [Route("test")]
-    public async Task<IActionResult> Get()
+    public IActionResult Get()
     {
         try
         {
@@ -42,7 +42,7 @@ public class WeatherForecastController : ControllerBase
             _eventBus.Publish(new TestEvent()
             {
                 Name = "Phus",
-                TraceId = traceId   
+                TraceId = traceId
             });
             Log.Information("Publishing integration event success");
 
@@ -51,7 +51,7 @@ public class WeatherForecastController : ControllerBase
         {
             Log.Error(ex, "ERROR publishing integration event: {IntegrationEventId} from {AppName}");
         }
-        
+
         return Ok();
     }
 

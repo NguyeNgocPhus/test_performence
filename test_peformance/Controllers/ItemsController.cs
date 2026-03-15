@@ -10,8 +10,6 @@ namespace test_peformance.Controllers;
 [Route("api/[controller]")]
 public class ItemsController : ControllerBase
 {
-    private static int _items = 0; // Tài nguyên chung
-
     private readonly ILogger<ItemsController> _logger;
     private readonly IClusterClient _client;
     private readonly IGrainFactory _grainFactory;

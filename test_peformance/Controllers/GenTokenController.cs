@@ -19,7 +19,7 @@ public class GenTokenController : Controller
     }
 
     [HttpPost]
-    public async Task<ActionResult> Login([FromBody] LoginRequest request)
+    public ActionResult Login([FromBody] LoginRequest request)
     {
         var email = request.Email;
         // await _cacheService.SetAsync(email, request.Password);
@@ -54,7 +54,6 @@ public class GenTokenController : Controller
 
 public class LoginRequest
 {
-    public string Email { get; set; }
-    public string Password { get; set; }
-
+    public string Email { get; set; } = string.Empty;
+    public string Password { get; set; } = string.Empty;
 }
